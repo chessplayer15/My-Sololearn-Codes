@@ -1,0 +1,1128 @@
+<html>
+<body>
+<div id=container>
+<div class=score>
+<p> Your Score </p>
+<p><button id=Yscored onclick="decrease('YS')">-</button> <span id=Yscore></span> / <span id=GEscore></span> <button id=Yscoreu onclick="increase('YS')">+</button></p>
+</div>
+<div class=research>
+            <div id=rheader>
+            Color
+            # of uses
+            </div>
+         <p>
+            <span id=N05></span>
+            <span id=U05></span>
+         </p>
+         <p>
+            <button id=Greend onclick="decrease('5')">-</button>
+            <span id=RP05></span>
+            <span id=G1></span>
+            <span id=G2></span>
+            <span id=G3></span>
+            <span id=G4></span>
+            <span id=G5></span>
+            <span id=G6></span>
+            <span id=G7></span>
+            <span id=G8></span>
+            <span id=D05></span>
+            <button id=Greenu onclick="increase('5')">+</button>
+          </p>
+          <p>
+            <span id=N04></span>
+            <span id=U04></span>
+          </p>
+          <p>
+            <button id=Redd onclick="decrease('4')">-</button>
+            <span id=RP04></span>
+            <span id=R1></span>
+            <span id=R2></span>
+            <span id=R3></span>
+            <span id=R4></span>
+            <span id=R5></span>
+            <span id=R6></span>
+            <span id=R7></span>
+            <span id=R8></span>
+            <span id=D04></span>
+            <button id=Redu onclick="increase('4')">+</button>
+          </p>
+          <p>
+            <span id=N03></span>
+            <span id=U03></span>
+          </p>
+          <p>
+            <button id=Brownd onclick="decrease('3')">-</button>
+            <span id=RP03></span>
+            <span id=B1></span>
+            <span id=B2></span>
+            <span id=B3></span>
+            <span id=B4></span>
+            <span id=B5></span>
+            <span id=B6></span>
+            <span id=B7></span>
+            <span id=B8></span>
+            <span id=D03></span>
+            <button id=Brownu onclick="increase('3')">+</button>
+          </p>
+          <p>
+            <span id=N02></span>
+            <span id=U02></span>
+          </p>
+          <p>
+            <button id=Yellowd onclick="decrease('2')">-</button>
+            <span id=RP02></span>
+            <span id=Y1></span>
+            <span id=Y2></span>
+            <span id=Y3></span>
+            <span id=Y4></span>
+            <span id=Y5></span>
+            <span id=Y6></span>
+            <span id=Y7></span>
+            <span id=Y8></span>
+            <span id=D02></span>
+            <button id=Yellowu onclick="increase('2')">+</button>
+          </p>
+          <p>
+            <span id=N01></span>
+            <span id=U01></span>
+          </p>
+          <p>
+            <button id=Whited onclick="decrease('1')">-</button>
+            <span id=RP01></span>
+            <span id=W1></span>
+            <span id=W2></span>
+            <span id=W3></span>
+            <span id=W4></span>
+            <span id=W5></span>
+            <span id=W6></span>
+            <span id=W7></span>
+            <span id=W8></span>
+            <span id=D01></span>
+            <button id=Whiteu onclick="increase('1')">+</button>
+          </p>
+</div>
+<div class=buttons>
+<p><button id=newGame onclick="newGame()">NEW GAME</button></p>
+<p><button id=rules onclick="toggleRules()">How to Use</button></p>
+</div>
+</div>
+<script>
+//
+//5 green, 4 red, 3 brown, 2 yellow, 1 white
+//2=1X, 5=2X, 8=done
+//I am a beginner coder and learning for fun.  This code can probably be simplified.  Any tips, tricks, and advice if greatly appreciated.
+
+alert("Hello, welcome.  This is a Scorecard for the boardgame Vivajava The Coffee Game The Dice Game.  This is not the game, this is only a Scorecard you will need the physical version of the boardgame.  On the next page you will insert how many victory points each track is worth once completed.  Also, if you are unfamiliar with the app please click how to use.") ;
+var C05 = +prompt("Enter Green research track victory points.");
+var C04 = +prompt("Enter Red research track victory points.");
+var C03 = +prompt("Enter Brown research track victory points.");
+var C02 = +prompt("Enter Yellow research track victory points.");
+var C01 = +prompt("Enter White research track victory points.");
+
+window.onload = function() {
+    var Yscore = document.getElementById("Yscore");
+    var GEscore = document.getElementById("GEscore");
+    var RP01 = document.getElementById("RP01");
+    var RP02 = document.getElementById("RP02");
+    var RP03 = document.getElementById("RP03");
+    var RP04 = document.getElementById("RP04");
+    var RP05 = document.getElementById("RP05");
+    var U01 = document.getElementById("U01");
+    var U02 = document.getElementById("U02");
+    var U03 = document.getElementById("U03");
+    var U04 = document.getElementById("U04");
+    var U05 = document.getElementById("U05");
+    var D01 = document.getElementById("D01");
+    var D02 = document.getElementById("D02");
+    var D03 = document.getElementById("D03");
+    var D04 = document.getElementById("D04");
+    var D05 = document.getElementById("D05");
+    var N01 = document.getElementById("N01");
+    var N02 = document.getElementById("N02");
+    var N03 = document.getElementById("N03");
+    var N04 = document.getElementById("N04");
+    var N05 = document.getElementById("N05");
+    var G1 = document.getElementById("G1");
+    var G2 = document.getElementById("G2");
+    var G3 = document.getElementById("G3");
+    var G4 = document.getElementById("G4");
+    var G5 = document.getElementById("G5");
+    var G6 = document.getElementById("G6");
+    var G7 = document.getElementById("G7");
+    var G8 = document.getElementById("G8");
+    var R1 = document.getElementById("R1");
+    var R2 = document.getElementById("R2");
+    var R3 = document.getElementById("R3");
+    var R4 = document.getElementById("R4");
+    var R5 = document.getElementById("R5");
+    var R6 = document.getElementById("R6");
+    var R7 = document.getElementById("R7");
+    var R8 = document.getElementById("R8");
+    var B1 = document.getElementById("B1");
+    var B2 = document.getElementById("B2");
+    var B3 = document.getElementById("B3");
+    var B4 = document.getElementById("B4");
+    var B5 = document.getElementById("B5");
+    var B6 = document.getElementById("B6");
+    var B7 = document.getElementById("B7");
+    var B8 = document.getElementById("B8");
+    var Y1 = document.getElementById("Y1");
+    var Y2 = document.getElementById("Y2");
+    var Y3 = document.getElementById("Y3");
+    var Y4 = document.getElementById("Y4");
+    var Y5 = document.getElementById("Y5");
+    var Y6 = document.getElementById("Y6");
+    var Y7 = document.getElementById("Y7");
+    var Y8 = document.getElementById("Y8");
+    var W1 = document.getElementById("W1");
+    var W2 = document.getElementById("W2");
+    var W3 = document.getElementById("W3");
+    var W4 = document.getElementById("W4");
+    var W5 = document.getElementById("W5");
+    var W6 = document.getElementById("W6");
+    var W7 = document.getElementById("W7");
+    var W8 = document.getElementById("W8");
+    GEscore.innerHTML = 21;
+    Yscore.innerHTML = 0;
+    RP05.innerHTML = 0;
+    RP04.innerHTML = 0;
+    RP03.innerHTML = 0;
+    RP02.innerHTML = 0;
+    RP01.innerHTML = 0;
+    U05.innerHTML = "0X";
+    U04.innerHTML = "0X";
+    U03.innerHTML = "0X";
+    U02.innerHTML = "0X";
+    U01.innerHTML = "0X";
+    D05.innerHTML = 8;
+    D04.innerHTML = 8;
+    D03.innerHTML = 8;
+    D02.innerHTML = 8;
+    D01.innerHTML = 8;
+    N05.innerHTML = "Green";
+    N04.innerHTML = "Red";
+    N03.innerHTML = "Brown";
+    N02.innerHTML = "Yellow";
+    N01.innerHTML = "White";
+    G1.innerHTML = "0";
+    G2.innerHTML = "0";
+    G3.innerHTML = "0";
+    G4.innerHTML = "0";
+    G5.innerHTML = "0";
+    G6.innerHTML = "0";
+    G7.innerHTML = "0";
+    G8.innerHTML = "0";
+    R1.innerHTML = "0";
+    R2.innerHTML = "0";
+    R3.innerHTML = "0";
+    R4.innerHTML = "0";
+    R5.innerHTML = "0";
+    R6.innerHTML = "0";
+    R7.innerHTML = "0";
+    R8.innerHTML = "0";
+    B1.innerHTML = "0";
+    B2.innerHTML = "0";
+    B3.innerHTML = "0";
+    B4.innerHTML = "0";
+    B5.innerHTML = "0";
+    B6.innerHTML = "0";
+    B7.innerHTML = "0";
+    B8.innerHTML = "0";
+    Y1.innerHTML = "0";
+    Y2.innerHTML = "0";
+    Y3.innerHTML = "0";
+    Y4.innerHTML = "0";
+    Y5.innerHTML = "0";
+    Y6.innerHTML = "0";
+    Y7.innerHTML = "0";
+    Y8.innerHTML = "0";
+    W1.innerHTML = "0";
+    W2.innerHTML = "0";
+    W3.innerHTML = "0";
+    W4.innerHTML = "0";
+    W5.innerHTML = "0";
+    W6.innerHTML = "0";
+    W7.innerHTML = "0";
+    W8.innerHTML = "0";
+    colorize(G1) ; colorize(G2) ; colorize(G3) ; colorize(G4) ; colorize(G5) ; colorize(G6) ; colorize(G7) ; colorize(G8) ; colorize(R1) ; colorize(R2) ; colorize(R3) ; colorize(R4) ; colorize(R5) ; colorize(R6) ; colorize(R7) ; colorize(R8) ; colorize(B1) ; colorize(B2) ; colorize(B3) ; colorize(B4) ; colorize(B5) ; colorize(B6) ; colorize(B7) ; colorize(B8) ; colorize(Y1) ; colorize(Y2) ; colorize(Y3) ; colorize(Y4) ; colorize(Y5) ; colorize(Y6) ; colorize(Y7) ; colorize(Y8) ; colorize(W1) ; colorize(W2) ; colorize(W3) ; colorize(W4) ; colorize(W5) ; colorize(W6) ; colorize(W7) ; colorize(W8) ;
+}
+function newGame() {
+        var Yscore = document.getElementById("Yscore");
+    var GEscore = document.getElementById("GEscore");
+    var RP01 = document.getElementById("RP01");
+    var RP02 = document.getElementById("RP02");
+    var RP03 = document.getElementById("RP03");
+    var RP04 = document.getElementById("RP04");
+    var RP05 = document.getElementById("RP05");
+    var U01 = document.getElementById("U01");
+    var U02 = document.getElementById("U02");
+    var U03 = document.getElementById("U03");
+    var U04 = document.getElementById("U04");
+    var U05 = document.getElementById("U05");
+    var D01 = document.getElementById("D01");
+    var D02 = document.getElementById("D02");
+    var D03 = document.getElementById("D03");
+    var D04 = document.getElementById("D04");
+    var D05 = document.getElementById("D05");
+    var N01 = document.getElementById("N01");
+    var N02 = document.getElementById("N02");
+    var N03 = document.getElementById("N03");
+    var N04 = document.getElementById("N04");
+    var N05 = document.getElementById("N05");
+    var G1 = document.getElementById("G1");
+    var G2 = document.getElementById("G2");
+    var G3 = document.getElementById("G3");
+    var G4 = document.getElementById("G4");
+    var G5 = document.getElementById("G5");
+    var G6 = document.getElementById("G6");
+    var G7 = document.getElementById("G7");
+    var G8 = document.getElementById("G8");
+    var R1 = document.getElementById("R1");
+    var R2 = document.getElementById("R2");
+    var R3 = document.getElementById("R3");
+    var R4 = document.getElementById("R4");
+    var R5 = document.getElementById("R5");
+    var R6 = document.getElementById("R6");
+    var R7 = document.getElementById("R7");
+    var R8 = document.getElementById("R8");
+    var B1 = document.getElementById("B1");
+    var B2 = document.getElementById("B2");
+    var B3 = document.getElementById("B3");
+    var B4 = document.getElementById("B4");
+    var B5 = document.getElementById("B5");
+    var B6 = document.getElementById("B6");
+    var B7 = document.getElementById("B7");
+    var B8 = document.getElementById("B8");
+    var Y1 = document.getElementById("Y1");
+    var Y2 = document.getElementById("Y2");
+    var Y3 = document.getElementById("Y3");
+    var Y4 = document.getElementById("Y4");
+    var Y5 = document.getElementById("Y5");
+    var Y6 = document.getElementById("Y6");
+    var Y7 = document.getElementById("Y7");
+    var Y8 = document.getElementById("Y8");
+    var W1 = document.getElementById("W1");
+    var W2 = document.getElementById("W2");
+    var W3 = document.getElementById("W3");
+    var W4 = document.getElementById("W4");
+    var W5 = document.getElementById("W5");
+    var W6 = document.getElementById("W6");
+    var W7 = document.getElementById("W7");
+    var W8 = document.getElementById("W8");
+    GEscore.innerHTML = 21;
+    Yscore.innerHTML = 0;
+    RP05.innerHTML = 0;
+    RP04.innerHTML = 0;
+    RP03.innerHTML = 0;
+    RP02.innerHTML = 0;
+    RP01.innerHTML = 0;
+    U05.innerHTML = "0X";
+    U04.innerHTML = "0X";
+    U03.innerHTML = "0X";
+    U02.innerHTML = "0X";
+    U01.innerHTML = "0X";
+    D05.innerHTML = 8;
+    D04.innerHTML = 8;
+    D03.innerHTML = 8;
+    D02.innerHTML = 8;
+    D01.innerHTML = 8;
+    N05.innerHTML = "Green";
+    N04.innerHTML = "Red";
+    N03.innerHTML = "Brown";
+    N02.innerHTML = "Yellow";
+    N01.innerHTML = "White";
+    G1.innerHTML = "0";
+    G2.innerHTML = "0";
+    G3.innerHTML = "0";
+    G4.innerHTML = "0";
+    G5.innerHTML = "0";
+    G6.innerHTML = "0";
+    G7.innerHTML = "0";
+    G8.innerHTML = "0";
+    R1.innerHTML = "0";
+    R2.innerHTML = "0";
+    R3.innerHTML = "0";
+    R4.innerHTML = "0";
+    R5.innerHTML = "0";
+    R6.innerHTML = "0";
+    R7.innerHTML = "0";
+    R8.innerHTML = "0";
+    B1.innerHTML = "0";
+    B2.innerHTML = "0";
+    B3.innerHTML = "0";
+    B4.innerHTML = "0";
+    B5.innerHTML = "0";
+    B6.innerHTML = "0";
+    B7.innerHTML = "0";
+    B8.innerHTML = "0";
+    Y1.innerHTML = "0";
+    Y2.innerHTML = "0";
+    Y3.innerHTML = "0";
+    Y4.innerHTML = "0";
+    Y5.innerHTML = "0";
+    Y6.innerHTML = "0";
+    Y7.innerHTML = "0";
+    Y8.innerHTML = "0";
+    W1.innerHTML = "0";
+    W2.innerHTML = "0";
+    W3.innerHTML = "0";
+    W4.innerHTML = "0";
+    W5.innerHTML = "0";
+    W6.innerHTML = "0";
+    W7.innerHTML = "0";
+    W8.innerHTML = "0";
+    colorize(G1) ; colorize(G2) ; colorize(G3) ; colorize(G4) ; colorize(G5) ; colorize(G6) ; colorize(G7) ; colorize(G8) ; colorize(R1) ; colorize(R2) ; colorize(R3) ; colorize(R4) ; colorize(R5) ; colorize(R6) ; colorize(R7) ; colorize(R8) ; colorize(B1) ; colorize(B2) ; colorize(B3) ; colorize(B4) ; colorize(B5) ; colorize(B6) ; colorize(B7) ; colorize(B8) ; colorize(Y1) ; colorize(Y2) ; colorize(Y3) ; colorize(Y4) ; colorize(Y5) ; colorize(Y6) ; colorize(Y7) ; colorize(Y8) ; colorize(W1) ; colorize(W2) ; colorize(W3) ; colorize(W4) ; colorize(W5) ; colorize(W6) ; colorize(W7) ; colorize(W8) ;
+}
+
+function colorize(box) {
+    switch (box.innerHTML) {
+        case "0":
+        box.style.backgroundColor = "gray" ;
+        box.style.color = "gray" ;
+        break ;
+        case "5":
+        box.style.backgroundColor = "green" ;
+        box.style.color = "green" ;
+        break ;
+        case "4":
+        box.style.backgroundColor = "red" ;
+        box.style.color = "red" ;
+        break ;
+        case "3":
+        box.style.backgroundColor = "Brown" ;
+        box.style.color = "Brown" ;
+        break ;
+        case "2":
+        box.style.backgroundColor = "yellow" ;
+        box.style.color = "yellow" ;
+        break ;
+        case "1":
+        box.style.backgroundColor = "White" ;
+        box.style.color = "White" ;
+        break ;
+        case "9":
+        box.style.backgroundColor = "black" ;
+        box.style.color = "black" ;
+        break ;
+    } ;
+}
+function increase(boxID) {
+    var Yscore = document.getElementById("Yscore");
+    var RP05 = document.getElementById("RP05");
+    var U05 = document.getElementById("U05");
+    var G1 = document.getElementById("G1");
+    var G2 = document.getElementById("G2");
+    var G3 = document.getElementById("G3");
+    var G4 = document.getElementById("G4");
+    var G5 = document.getElementById("G5");
+    var G6 = document.getElementById("G6");
+    var G7 = document.getElementById("G7");
+    var G8 = document.getElementById("G8");
+    var RP04 = document.getElementById("RP04");
+    var U04 = document.getElementById("U04");
+    var R1 = document.getElementById("R1");
+    var R2 = document.getElementById("R2");
+    var R3 = document.getElementById("R3");
+    var R4 = document.getElementById("R4");
+    var R5 = document.getElementById("R5");
+    var R6 = document.getElementById("R6");
+    var R7 = document.getElementById("R7");
+    var R8 = document.getElementById("R8");
+    var RP03 = document.getElementById("RP03");
+    var U03 = document.getElementById("U03");
+    var B1 = document.getElementById("B1");
+    var B2 = document.getElementById("B2");
+    var B3 = document.getElementById("B3");
+    var B4 = document.getElementById("B4");
+    var B5 = document.getElementById("B5");
+    var B6 = document.getElementById("B6");
+    var B7 = document.getElementById("B7");
+    var B8 = document.getElementById("B8");
+    var RP02 = document.getElementById("RP02");
+    var U02 = document.getElementById("U02");
+    var Y1 = document.getElementById("Y1");
+    var Y2 = document.getElementById("Y2");
+    var Y3 = document.getElementById("Y3");
+    var Y4 = document.getElementById("Y4");
+    var Y5 = document.getElementById("Y5");
+    var Y6 = document.getElementById("Y6");
+    var Y7 = document.getElementById("Y7");
+    var Y8 = document.getElementById("Y8");
+    var RP01 = document.getElementById("RP01");
+    var U01 = document.getElementById("U01");
+    var W1 = document.getElementById("W1");
+    var W2 = document.getElementById("W2");
+    var W3 = document.getElementById("W3");
+    var W4 = document.getElementById("W4");
+    var W5 = document.getElementById("W5");
+    var W6 = document.getElementById("W6");
+    var W7 = document.getElementById("W7");
+    var W8 = document.getElementById("W8");
+    switch (boxID) {
+        case "YS":
+        Yscore.innerHTML = +Yscore.innerHTML+1 ;
+        if (Yscore.innerHTML >= 21) 
+        alert ("You won the game with " + Yscore.innerHTML + " points");
+        break;
+        case "5":
+        if (G1.innerHTML == "0") {
+        G1.innerHTML = 5 ;
+        colorize(G1) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "0X" ;
+    } else if (G2.innerHTML == "0") {
+        G2.innerHTML = 5 ;
+        colorize(G2) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "1X" ;
+    } else if (G3.innerHTML == "0") {
+        G3.innerHTML = 5 ;
+        colorize(G3) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "1X" ;
+    } else if (G4.innerHTML == "0") {
+        G4.innerHTML = 5 ;
+        colorize(G4) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "1X" ;
+    } else if (G5.innerHTML == "0") {
+        G5.innerHTML = 5 ;
+        colorize(G5) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "2X" ;
+    } else if (G6.innerHTML == "0") {
+        G6.innerHTML = 5 ;
+        colorize(G6) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "2X" ;
+    } else if (G7.innerHTML == "0") {
+        G7.innerHTML = 5 ;
+        colorize(G7) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "2X" ;
+    } else if (G8.innerHTML == "0") {
+        G1.innerHTML = 9 ;
+        colorize(G1) ;
+        G2.innerHTML = 9 ;
+        colorize(G2) ;
+        G3.innerHTML = 9 ;
+        colorize(G3) ;
+        G4.innerHTML = 9 ;
+        colorize(G4) ;
+        G5.innerHTML = 9 ;
+        colorize(G5) ;
+        G6.innerHTML = 9 ;
+        colorize(G6) ;
+        G7.innerHTML = 9 ;
+        colorize(G7) ;
+        G8.innerHTML = 9 ;
+        colorize(G8) ;
+        RP05.innerHTML = +RP05.innerHTML+1 ;
+        U05.innerHTML = "UNUSABLE" ;
+        alert ("You completed the " + N05.innerHTML + " research track and scored " + C05 + " points");
+        Yscore.innerHTML = +Yscore.innerHTML+C05 ;
+        if (Yscore.innerHTML >= 21) 
+        alert ("You won the game with " + Yscore.innerHTML + " points");
+} ;
+        break;
+        case "4":
+        if (R1.innerHTML == "0") {
+        R1.innerHTML = 4 ;
+        colorize(R1) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "0X" ;
+    } else if (R2.innerHTML == "0") {
+        R2.innerHTML = 4 ;
+        colorize(R2) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "1X" ;
+    } else if (R3.innerHTML == "0") {
+        R3.innerHTML = 4 ;
+        colorize(R3) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "1X" ;
+    } else if (R4.innerHTML == "0") {
+        R4.innerHTML = 4 ;
+        colorize(R4) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "1X" ;
+    } else if (R5.innerHTML == "0") {
+        R5.innerHTML = 4 ;
+        colorize(R5) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "2X" ;
+    } else if (R6.innerHTML == "0") {
+        R6.innerHTML = 4 ;
+        colorize(R6) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "2X" ;
+    } else if (R7.innerHTML == "0") {
+        R7.innerHTML = 4 ;
+        colorize(R7) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "2X" ;
+    } else if (R8.innerHTML == "0") {
+        R1.innerHTML = 9 ;
+        colorize(R1) ;
+        R2.innerHTML = 9 ;
+        colorize(R2) ;
+        R3.innerHTML = 9 ;
+        colorize(R3) ;
+        R4.innerHTML = 9 ;
+        colorize(R4) ;
+        R5.innerHTML = 9 ;
+        colorize(R5) ;
+        R6.innerHTML = 9 ;
+        colorize(R6) ;
+        R7.innerHTML = 9 ;
+        colorize(R7) ;
+        R8.innerHTML = 9 ;
+        colorize(R8) ;
+        RP04.innerHTML = +RP04.innerHTML+1 ;
+        U04.innerHTML = "UNUSABLE" ;
+        alert ("You completed the " + N04.innerHTML + " research track and scored " + C04 + " points");
+        Yscore.innerHTML = +Yscore.innerHTML+C04 ;
+        if (Yscore.innerHTML >= 21) 
+        alert ("You won the game with " + Yscore.innerHTML + " points");
+} ;
+        break;
+        case "3":
+        if (B1.innerHTML == "0") {
+        B1.innerHTML = 3 ;
+        colorize(B1) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "0X" ;
+    } else if (B2.innerHTML == "0") {
+        B2.innerHTML = 3 ;
+        colorize(B2) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "1X" ;
+    } else if (B3.innerHTML == "0") {
+        B3.innerHTML = 3 ;
+        colorize(B3) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "1X" ;
+    } else if (B4.innerHTML == "0") {
+        B4.innerHTML = 3 ;
+        colorize(B4) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "1X" ;
+    } else if (B5.innerHTML == "0") {
+        B5.innerHTML = 3 ;
+        colorize(B5) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "2X" ;
+    } else if (B6.innerHTML == "0") {
+        B6.innerHTML = 3 ;
+        colorize(B6) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "2X" ;
+    } else if (B7.innerHTML == "0") {
+        B7.innerHTML = 3 ;
+        colorize(B7) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "2X" ;
+    } else if (B8.innerHTML == "0") {
+        B1.innerHTML = 9 ;
+        colorize(B1) ;
+        B2.innerHTML = 9 ;
+        colorize(B2) ;
+        B3.innerHTML = 9 ;
+        colorize(B3) ;
+        B4.innerHTML = 9 ;
+        colorize(B4) ;
+        B5.innerHTML = 9 ;
+        colorize(B5) ;
+        B6.innerHTML = 9 ;
+        colorize(B6) ;
+        B7.innerHTML = 9 ;
+        colorize(B7) ;
+        B8.innerHTML = 9 ;
+        colorize(B8) ;
+        RP03.innerHTML = +RP03.innerHTML+1 ;
+        U03.innerHTML = "UNUSABLE" ;
+        alert ("You completed the " + N03.innerHTML + " research track and scored " + C03 + " points");
+        Yscore.innerHTML = +Yscore.innerHTML+C03 ;
+        if (Yscore.innerHTML >= 21) 
+        alert ("You won the game with " + Yscore.innerHTML + " points");
+} ;
+        break;
+        case "2":
+        if (Y1.innerHTML == "0") {
+        Y1.innerHTML = 2 ;
+        colorize(Y1) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "0X" ;
+    } else if (Y2.innerHTML == "0") {
+        Y2.innerHTML = 2 ;
+        colorize(Y2) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "1X" ;
+    } else if (Y3.innerHTML == "0") {
+        Y3.innerHTML = 2 ;
+        colorize(Y3) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "1X" ;
+    } else if (Y4.innerHTML == "0") {
+        Y4.innerHTML = 2 ;
+        colorize(Y4) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "1X" ;
+    } else if (Y5.innerHTML == "0") {
+        Y5.innerHTML = 2 ;
+        colorize(Y5) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "2X" ;
+    } else if (Y6.innerHTML == "0") {
+        Y6.innerHTML = 2 ;
+        colorize(Y6) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "2X" ;
+    } else if (Y7.innerHTML == "0") {
+        Y7.innerHTML = 2 ;
+        colorize(Y7) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "2X" ;
+    } else if (Y8.innerHTML == "0") {
+        Y1.innerHTML = 9 ;
+        colorize(Y1) ;
+        Y2.innerHTML = 9 ;
+        colorize(Y2) ;
+        Y3.innerHTML = 9 ;
+        colorize(Y3) ;
+        Y4.innerHTML = 9 ;
+        colorize(Y4) ;
+        Y5.innerHTML = 9 ;
+        colorize(Y5) ;
+        Y6.innerHTML = 9 ;
+        colorize(Y6) ;
+        Y7.innerHTML = 9 ;
+        colorize(Y7) ;
+        Y8.innerHTML = 9 ;
+        colorize(Y8) ;
+        RP02.innerHTML = +RP02.innerHTML+1 ;
+        U02.innerHTML = "UNUSABLE" ;
+        alert ("You completed the " + N02.innerHTML + " research track and scored " + C02 + " points");
+        Yscore.innerHTML = +Yscore.innerHTML+C02 ;
+        if (Yscore.innerHTML >= 21) 
+        alert ("You won the game with " + Yscore.innerHTML + " points");
+} ;
+        break;
+        case "1":
+        if (W1.innerHTML == "0") {
+        W1.innerHTML = 1 ;
+        colorize(W1) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "0X" ;
+    } else if (W2.innerHTML == "0") {
+        W2.innerHTML = 1 ;
+        colorize(W2) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "1X" ;
+    } else if (W3.innerHTML == "0") {
+        W3.innerHTML = 1 ;
+        colorize(W3) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "1X" ;
+    } else if (W4.innerHTML == "0") {
+        W4.innerHTML = 1 ;
+        colorize(W4) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "1X" ;
+    } else if (W5.innerHTML == "0") {
+        W5.innerHTML = 1 ;
+        colorize(W5) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "2X" ;
+    } else if (W6.innerHTML == "0") {
+        W6.innerHTML = 1 ;
+        colorize(W6) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "2X" ;
+    } else if (W7.innerHTML == "0") {
+        W7.innerHTML = 1 ;
+        colorize(W7) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "2X" ;
+    } else if (W8.innerHTML == "0") {
+        W1.innerHTML = 9 ;
+        colorize(W1) ;
+        W2.innerHTML = 9 ;
+        colorize(W2) ;
+        W3.innerHTML = 9 ;
+        colorize(W3) ;
+        W4.innerHTML = 9 ;
+        colorize(W4) ;
+        W5.innerHTML = 9 ;
+        colorize(W5) ;
+        W6.innerHTML = 9 ;
+        colorize(W6) ;
+        W7.innerHTML = 9 ;
+        colorize(W7) ;
+        W8.innerHTML = 9 ;
+        colorize(W8) ;
+        RP01.innerHTML = +RP01.innerHTML+1 ;
+        U01.innerHTML = "UNUSABLE" ;
+        alert ("You completed the " + N01.innerHTML + " research track and scored " + C01 + " points");
+        Yscore.innerHTML = +Yscore.innerHTML+C01 ;
+        if (Yscore.innerHTML >= 21) 
+        alert ("You won the game with " + Yscore.innerHTML + " points");
+} ;
+        break;
+    } ;
+}
+function decrease(boxID) {
+    var Yscore = document.getElementById("Yscore");
+    var RP05 = document.getElementById("RP05");
+    var U05 = document.getElementById("U05");
+    var G1 = document.getElementById("G1");
+    var G2 = document.getElementById("G2");
+    var G3 = document.getElementById("G3");
+    var G4 = document.getElementById("G4");
+    var G5 = document.getElementById("G5");
+    var G6 = document.getElementById("G6");
+    var G7 = document.getElementById("G7");
+    var G8 = document.getElementById("G8");
+    var RP04 = document.getElementById("RP04");
+    var U04 = document.getElementById("U04");
+    var R1 = document.getElementById("R1");
+    var R2 = document.getElementById("R2");
+    var R3 = document.getElementById("R3");
+    var R4 = document.getElementById("R4");
+    var R5 = document.getElementById("R5");
+    var R6 = document.getElementById("R6");
+    var R7 = document.getElementById("R7");
+    var R8 = document.getElementById("R8");
+    var RP03 = document.getElementById("RP03");
+    var U03 = document.getElementById("U03");
+    var B1 = document.getElementById("B1");
+    var B2 = document.getElementById("B2");
+    var B3 = document.getElementById("B3");
+    var B4 = document.getElementById("B4");
+    var B5 = document.getElementById("B5");
+    var B6 = document.getElementById("B6");
+    var B7 = document.getElementById("B7");
+    var B8 = document.getElementById("B8");
+    var RP02 = document.getElementById("RP02");
+    var U02 = document.getElementById("U02");
+    var Y1 = document.getElementById("Y1");
+    var Y2 = document.getElementById("Y2");
+    var Y3 = document.getElementById("Y3");
+    var Y4 = document.getElementById("Y4");
+    var Y5 = document.getElementById("Y5");
+    var Y6 = document.getElementById("Y6");
+    var Y7 = document.getElementById("Y7");
+    var Y8 = document.getElementById("Y8");
+    var RP01 = document.getElementById("RP01");
+    var U01 = document.getElementById("U01");
+    var W1 = document.getElementById("W1");
+    var W2 = document.getElementById("W2");
+    var W3 = document.getElementById("W3");
+    var W4 = document.getElementById("W4");
+    var W5 = document.getElementById("W5");
+    var W6 = document.getElementById("W6");
+    var W7 = document.getElementById("W7");
+    var W8 = document.getElementById("W8");
+    switch (boxID) {
+        case "YS":
+        Yscore.innerHTML = +Yscore.innerHTML-1 ;
+        break;
+        case "5":
+        if (G8.innerHTML == "9") {
+        G1.innerHTML = 5 ;
+        colorize(G1) ;
+        G2.innerHTML = 5 ;
+        colorize(G2) ;
+        G3.innerHTML = 5 ;
+        colorize(G3) ;
+        G4.innerHTML = 5 ;
+        colorize(G4) ;
+        G5.innerHTML = 5 ;
+        colorize(G5) ;
+        G6.innerHTML = 5 ;
+        colorize(G6) ;
+        G7.innerHTML = 5 ;
+        colorize(G7) ;
+        G8.innerHTML = 0 ;
+        colorize(G8) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "2X" ;
+        Yscore.innerHTML = +Yscore.innerHTML-C05 ;
+    } else if (G7.innerHTML == "5") {
+        G7.innerHTML = 0 ;
+        colorize(G7) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "2X" ;
+    } else if (G6.innerHTML == "5") {
+        G6.innerHTML = 0 ;
+        colorize(G6) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "2X" ;
+    } else if (G5.innerHTML == "5") {
+        G5.innerHTML = 0 ;
+        colorize(G5) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "1X" ;
+    } else if (G4.innerHTML == "5") {
+        G4.innerHTML = 0 ;
+        colorize(G4) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "1X" ;
+    } else if (G3.innerHTML == "5") {
+        G3.innerHTML = 0 ;
+        colorize(G3) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "1X" ;
+    } else if (G2.innerHTML == "5") {
+        G2.innerHTML = 0 ;
+        colorize(G2) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "0X" ;
+    } else if (G1.innerHTML == "5") {
+        G1.innerHTML = 0 ;
+        colorize(G1) ;
+        RP05.innerHTML = +RP05.innerHTML-1 ;
+        U05.innerHTML = "0X" ;
+} ;
+        break;
+        case "4":
+        if (R8.innerHTML == "9") {
+        R1.innerHTML = 4 ;
+        colorize(R1) ;
+        R2.innerHTML = 4 ;
+        colorize(R2) ;
+        R3.innerHTML = 4 ;
+        colorize(R3) ;
+        R4.innerHTML = 4 ;
+        colorize(R4) ;
+        R5.innerHTML = 4 ;
+        colorize(R5) ;
+        R6.innerHTML = 4 ;
+        colorize(R6) ;
+        R7.innerHTML = 4 ;
+        colorize(R7) ;
+        R8.innerHTML = 0 ;
+        colorize(R8) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "2X" ;
+        Yscore.innerHTML = +Yscore.innerHTML-C04 ;
+    } else if (R7.innerHTML == "4") {
+        R7.innerHTML = 0 ;
+        colorize(R7) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "2X" ;
+    } else if (R6.innerHTML == "4") {
+        R6.innerHTML = 0 ;
+        colorize(R6) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "2X" ;
+    } else if (R5.innerHTML == "4") {
+        R5.innerHTML = 0 ;
+        colorize(R5) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "1X" ;
+    } else if (R4.innerHTML == "4") {
+        R4.innerHTML = 0 ;
+        colorize(R4) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "1X" ;
+    } else if (R3.innerHTML == "4") {
+        R3.innerHTML = 0 ;
+        colorize(R3) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "1X" ;
+    } else if (R2.innerHTML == "4") {
+        R2.innerHTML = 0 ;
+        colorize(R2) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "0X" ;
+    } else if (R1.innerHTML == "4") {
+        R1.innerHTML = 0 ;
+        colorize(R1) ;
+        RP04.innerHTML = +RP04.innerHTML-1 ;
+        U04.innerHTML = "0X" ;
+} ;
+        break;
+        case "3":
+        if (B8.innerHTML == "9") {
+        B1.innerHTML = 3 ;
+        colorize(B1) ;
+        B2.innerHTML = 3 ;
+        colorize(B2) ;
+        B3.innerHTML = 3 ;
+        colorize(B3) ;
+        B4.innerHTML = 3 ;
+        colorize(B4) ;
+        B5.innerHTML = 3 ;
+        colorize(B5) ;
+        B6.innerHTML = 3 ;
+        colorize(B6) ;
+        B7.innerHTML = 3 ;
+        colorize(B7) ;
+        B8.innerHTML = 0 ;
+        colorize(B8) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "2X" ;
+        Yscore.innerHTML = +Yscore.innerHTML-C03 ;
+    } else if (B7.innerHTML == "3") {
+        B7.innerHTML = 0 ;
+        colorize(B7) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "2X" ;
+    } else if (B6.innerHTML == "3") {
+        B6.innerHTML = 0 ;
+        colorize(B6) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "2X" ;
+    } else if (B5.innerHTML == "3") {
+        B5.innerHTML = 0 ;
+        colorize(B5) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "1X" ;
+    } else if (B4.innerHTML == "3") {
+        B4.innerHTML = 0 ;
+        colorize(B4) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "1X" ;
+    } else if (B3.innerHTML == "3") {
+        B3.innerHTML = 0 ;
+        colorize(B3) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "1X" ;
+    } else if (B2.innerHTML == "3") {
+        B2.innerHTML = 0 ;
+        colorize(B2) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "0X" ;
+    } else if (B1.innerHTML == "3") {
+        B1.innerHTML = 0 ;
+        colorize(B1) ;
+        RP03.innerHTML = +RP03.innerHTML-1 ;
+        U03.innerHTML = "0X" ;
+} ;
+        break;
+        case "2":
+        if (Y8.innerHTML == "9") {
+        Y1.innerHTML = 2 ;
+        colorize(Y1) ;
+        Y2.innerHTML = 2 ;
+        colorize(Y2) ;
+        Y3.innerHTML = 2 ;
+        colorize(Y3) ;
+        Y4.innerHTML = 2 ;
+        colorize(Y4) ;
+        Y5.innerHTML = 2 ;
+        colorize(Y5) ;
+        Y6.innerHTML = 2 ;
+        colorize(Y6) ;
+        Y7.innerHTML = 2 ;
+        colorize(Y7) ;
+        Y8.innerHTML = 0 ;
+        colorize(Y8) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "2X" ;
+        Yscore.innerHTML = +Yscore.innerHTML-C02 ;
+    } else if (Y7.innerHTML == "2") {
+        Y7.innerHTML = 0 ;
+        colorize(Y7) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "2X" ;
+    } else if (Y6.innerHTML == "2") {
+        Y6.innerHTML = 0 ;
+        colorize(Y6) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "2X" ;
+    } else if (Y5.innerHTML == "2") {
+        Y5.innerHTML = 0 ;
+        colorize(Y5) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "1X" ;
+    } else if (Y4.innerHTML == "2") {
+        Y4.innerHTML = 0 ;
+        colorize(Y4) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "1X" ;
+    } else if (Y3.innerHTML == "2") {
+        Y3.innerHTML = 0 ;
+        colorize(Y3) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "1X" ;
+    } else if (Y2.innerHTML == "2") {
+        Y2.innerHTML = 0 ;
+        colorize(Y2) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "0X" ;
+    } else if (Y1.innerHTML == "2") {
+        Y1.innerHTML = 0 ;
+        colorize(Y1) ;
+        RP02.innerHTML = +RP02.innerHTML-1 ;
+        U02.innerHTML = "0X" ;
+} ;
+        break;
+        case "1":
+        if (W8.innerHTML == "9") {
+        W1.innerHTML = 1 ;
+        colorize(W1) ;
+        W2.innerHTML = 1 ;
+        colorize(W2) ;
+        W3.innerHTML = 1 ;
+        colorize(W3) ;
+        W4.innerHTML = 1 ;
+        colorize(W4) ;
+        W5.innerHTML = 1 ;
+        colorize(W5) ;
+        W6.innerHTML = 1 ;
+        colorize(W6) ;
+        W7.innerHTML = 1 ;
+        colorize(W7) ;
+        W8.innerHTML = 0 ;
+        colorize(W8) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "2X" ;
+        Yscore.innerHTML = +Yscore.innerHTML-C01 ;
+    } else if (W7.innerHTML == "1") {
+        W7.innerHTML = 0 ;
+        colorize(W7) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "2X" ;
+    } else if (W6.innerHTML == "1") {
+        W6.innerHTML = 0 ;
+        colorize(W6) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "2X" ;
+    } else if (W5.innerHTML == "1") {
+        W5.innerHTML = 0 ;
+        colorize(W5) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "1X" ;
+    } else if (W4.innerHTML == "1") {
+        W4.innerHTML = 0 ;
+        colorize(W4) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "1X" ;
+    } else if (W3.innerHTML == "1") {
+        W3.innerHTML = 0 ;
+        colorize(W3) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "1X" ;
+    } else if (W2.innerHTML == "1") {
+        W2.innerHTML = 0 ;
+        colorize(W2) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "0X" ;
+    } else if (W1.innerHTML == "1") {
+        W1.innerHTML = 0 ;
+        colorize(W1) ;
+        RP01.innerHTML = +RP01.innerHTML-1 ;
+        U01.innerHTML = "0X" ;
+} ;
+        break;
+    } ;
+}
+
+function toggleRules() {
+    alert("Welcome to my Scorecard app.  The objective of the game is to get 21 victory points.  When scoring victory points or research points press the + box.  If you go to far or lose points press the - box.  Once you complete a research track your victory points will automatically go up by however many points you entered for that track at the beginning.  Once you get at least 21 points you will receive an alert saying that you won.  When you finish a game simply hit the New Game button to start another game.  I hope you enjoy the Scorecard I made.  Please leave comments and suggestions.") ;
+}
+</script>
+</body>
+</html>
