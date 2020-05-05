@@ -1,0 +1,1537 @@
+<!--   -->
+
+<html>
+<head>
+<title>Generic Racing Card Game</title>
+</head>
+<body>
+<div id=container>
+<p> <span id=racepage onclick="show('Page1');">Current Race</span> <span id=standpage onclick="show('Page2');">Driver Standings</span> <span id=tstandpage onclick="show('Page3');">Team Standings</span> 
+<div class=page1>
+</p> <div id="Page1" class="page" style=""> Content of page 1
+
+<div id=laps>
+Lap # <span id=lapsD></span>/<span id=lapsT></span>
+</div>
+<div class=position>
+   <table id=position>
+        <thead>
+          <tr>
+            <th>Pos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><p>1</p></td>
+          </tr>
+          <tr>
+            <td><p>2</p></td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+<div class=rank>
+   <table id=rank>
+        <thead>
+          <tr>
+            <th>Driver</th>
+            <th>Time</th>
+            <th>D#</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr id=Player>
+            <td id=N01></td>
+            <td id=T01>0</td>
+            <td id=DN01>201</td>
+          </tr>
+          <tr id=Teammate>
+            <td id=N02></td>
+            <td id=T02>0</td>
+            <td id=DN02>202</td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+<div class=track>
+    </br>
+    <span>W = <span id=Weather></span></span></br>
+    </br>
+    <span>PL = <span id=PL></span></span></br>
+    </br>
+    <span>Pass = <span id=Pass></span></span></br>
+    </br>
+    <span>Tires = <span id=Tires></span></span></br>
+</div>
+<div class=table>
+    <div id=tableCard></div>
+</div>
+<div class=you>
+    <div id=card0 onclick="playCard('aa')"></div>
+    <div id=card1 onclick="playCard('bb')"></div>
+    <div id=card2 onclick="playCard('cc')"></div>
+    <div id=card3 onclick="playCard('dd')"></div>
+    <div id=card4 onclick="playCard('ee')"></div>
+    <div id=card5 onclick="playCard('ff')"></div>
+    <div id=card6 onclick="playCard('gg')"></div>
+    <div id=card7 onclick="playCard('hh')"></div>
+    <div id=card8 onclick="playCard('ii')"></div>
+</div>
+<div class=buttons>
+<p><button id=rules onclick="toggleRules()">How to Play</button>
+<p><button id=drawBtn onclick="nextlap()">END TURN</button>
+<p><button id=psBtn onclick="pitStop()">PIT STOP</button></p>
+</div>
+</div>
+</div>
+<div class=page2>
+<div id="Page2" class="page" style="display:none"> Content of page 2
+<div id=races>
+Race # <span id=racesD>1</span>/<span id=racesT></span>
+</div>
+<div class=driverposition>
+   <table id=driverposition>
+        <thead>
+          <tr>
+            <th>Pos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><p>1</p></td>
+          </tr>
+          <tr>
+            <td><p>2</p></td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+<div class=driverStandings>
+   <table id=driverStandings>
+        <thead>
+          <tr>
+            <th>Driver</th>
+            <th>Points</th>
+            <th></th>
+            <th>D#</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr id=Player>
+            <td id=DName01></td>
+            <td id=P01>0</td>
+            <td id=PTL01>0</td>
+            <td id=DDN01>201</td>
+          </tr>
+          <tr id=Teammate>
+            <td id=DName02></td>
+            <td id=P02>0</td>
+            <td id=PTL02>0</td>
+            <td id=DDN02>202</td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+<div id=buttons>
+    <p><button id=nextBtn onclick="nextRace()">NEXT RACE</button></p>
+</div>
+</div>
+</div>
+<div class=page3>
+<div id="Page3" class="page" style="display:none"> Content of page 3
+<div id=racesT>
+Race # <span id=racesDT>1</span>/<span id=racesTT></span>
+</div>
+<div class=teamposition>
+   <table id=teamposition>
+        <thead>
+          <tr>
+            <th>Pos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><p>1</p></td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+<div class=teamStandings>
+   <table id=teamStandings>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Points</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr id=Player>
+            <td id=TN01></td>
+            <td id=TP01>0</td>
+            <td id=PTTL>0</td>
+            <td id=TDN01>201</td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+<div id=buttons>
+    <p><button id=nextBtn onclick="nextRace()">NEXT RACE</button></p>
+</div>
+</div>
+</div>
+
+</body>
+<script>
+//
+//To Do List
+//
+//Damage from crashing cars if less than 1 second behind?????
+//Change Team Colors
+//Tire wear
+//Different Tires
+
+//Position1st2nd3rd4th5th6th7th8th9th10th11th12th13th14th15th16th17th18th19th20th21st
+//Points 90, 60, 40, 30, 25, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+
+var nums = [0], num;
+    for (var i = 0; i < 1000; i++) {
+    do {
+    num = (Math.ceil(Math.random()*200));
+    } while (nums.indexOf(num)!=-1) if (num%2 == 1) {
+    nums.push(num);
+} }
+
+var speed = ['+1', '+2', '+3', '+4', '+5'];
+var weatherN = 0;
+var DC = prompt("Enter number of cars on the grid. (2-202) The game is designed for 30-40.");
+var ET = 0;
+var D = 0;
+var DT = 0;
+var OTT = 0;
+var TL = 0;
+var SC = 0;
+var x = 0;   
+var DN = 0;
+var none = new driver("", 5, 5, 10, 10, 0, 0, 0, 99);
+var driver001 = new driver("Schofield", 5, 5, 9, 0, 3, 1, 0, 0, 200, 7, 0, "Crown Racing", "Red", "Gold");
+var driver002 = new driver("Higgins", 5, 3, 5, 6, 3, 1, 0, 0, 200, 7, 0, "Crown Racing", "Red", "Gold");
+var driver003 = new driver("Sparks", 5, 4, 10, 7, 0, 9, 0, 0, 200, 10, 0, "Brake Dancers", "White", "Red");
+var driver004 = new driver("Bull", 5, 2, 9, 9, 2, 6, 0, 0, 200, 9, 0, "Brake Dancers", "White", "Red");
+var driver005 = new driver("Steele", 5, 4, 10, 4, 7, 2, 0, 0, 200, 10, 0, "Steele Racing", "Blue", "Black");
+var driver006 = new driver("Reyes", 5, 4, 1, 2, 0, 2, 0, 0, 200, 8, 0, "Steele Racing", "Blue", "Black");
+var driver007 = new driver("Ramsey", 5, 2, 10, 1, 0, 5, 0, 0, 200, 9, 0, "Goldsun Corp", "Yellow", "Purple"); 
+var driver008 = new driver("Gallo", 5, 5, 0, 8, 0, 6, 0, 0, 200, 8, 0, "Goldsun Corp", "Yellow", "Purple");
+var driver009 = new driver("Donnelly", 5, 4, 4, 1, 5, 0, 0, 0, 200, 9, 0, "Phantasmedia", "Purple", "Gray"); 
+var driver010 = new driver("Singh", 5, 2, 4, 5, 3, 3, 0, 0, 200, 9, 0, "Phantasmedia", "Purple", "Gray");
+var driver011 = new driver("Stewart", 5, 2, 8, 5, 7, 0, 0, 0, 200, 7, 0, "Ravendream", "Black", "Purple"); 
+var driver012 = new driver("Malone", 5, 1, 2, 10, 4, 4, 0, 0, 200, 10, 0, "Ravendream", "Black", "Purple");
+var driver013 = new driver("Terry", 5, 5, 1, 8, 6, 5, 0, 0, 200, 10, 0, "Walker Racing", "White", "Silver");
+var driver014 = new driver("Mejia", 5, 3, 2, 5, 6, 0, 0, 0, 200, 7, 0, "Walker Racing", "White", "Silver");
+var driver015 = new driver("Rodriguez", 5, 2, 10, 8, 10, 3, 0, 0, 200, 10, 0, "Wizard Arts", "Blue", "Silver");
+var driver016 = new driver("Meyer", 5, 4, 10, 4, 7, 4, 0, 0, 200, 7, 0, "Wizard Arts", "Blue", "Silver");
+var driver017 = new driver("Graves", 5, 5, 8, 3, 9, 2, 0, 0, 200, 7, 0, "Meadows Racing", "Green", "Yellow");
+var driver018 = new driver("Gibson", 5, 1, 3, 9, 6, 3, 0, 0, 200, 9, 0, "Meadows Racing", "Green", "Yellow");
+var driver019 = new driver("Hicks", 5, 5, 0, 10, 10, 1, 0, 0, 200, 6, 0, "Red Mist Racing", "Red", "White");
+var driver020 = new driver("Hammond", 5, 3, 2, 2, 5, 3, 0, 0, 200, 10, 0, "Red Mist Racing", "Red", "White");
+var driver021 = new driver("Hopkins", 5, 3, 2, 0, 1, 2, 0, 0, 200, 2, 0, "Hook Media", "Gray", "Red");
+var driver022 = new driver("Ayala", 5, 5, 4, 5, 6, 5, 0, 0, 200, 5, 0, "Hook Media", "Gray", "Red");
+var driver023 = new driver("Rice", 5, 4, 2, 0, 0, 3, 0, 0, 200, 0, 0, "Jones Racing", "Red", "Purple");
+var driver024 = new driver("White", 5, 5, 5, 1, 8, 0, 0, 0, 200, 2, 0, "Jones Racing", "Red", "Purple");
+var driver025 = new driver("Avila", 5, 4, 10, 5, 10, 3, 0, 0, 200, 4, 0, "Olsson Racing", "Blue", "Orange");
+var driver026 = new driver("Spencer", 5, 3, 7, 2, 3, 4, 0, 0, 200, 1, 0, "Olsson Racing", "Blue", "Orange");
+var driver027 = new driver("Hernandez", 5, 3, 3, 4, 7, 6, 0, 0, 200, 10, 0, "Imagine Enterprises", "Green", "Silver");
+var driver028 = new driver("Hogan", 5, 1, 7, 5, 2, 5, 0, 0, 200, 1, 0, "Imagine Enterprises", "Green", "Silver");
+var driver029 = new driver("Silva", 5, 4, 4, 9, 3, 10, 0, 0, 200, 3, 0, "Equinox Corp", "Blue", "Red");
+var driver030 = new driver("Perkins", 5, 5, 1, 8, 4, 10, 0, 0, 200, 5, 0, "Equinox Corp", "Blue", "Red");
+var driver031 = new driver("Cortez", 5, 2, 2, 7, 5, 9, 0, 0, 200, 9, 0, "Phenomenon Security", "Purple", "Green");
+var driver032 = new driver("Leigh", 5, 1, 3, 5, 3, 3, 0, 0, 200, 0, 0, "Phenomenon Security", "Purple", "Green");
+var driver033 = new driver("Olson", 5, 2, 5, 6, 10, 4, 0, 0, 200, 6, 0, "Yew Solutions", "White", "Cyan");
+var driver034 = new driver("Vaughn", 5, 4, 6, 3, 4, 8, 0, 0, 200, 0, 0, "Yew Solutions", "White", "Cyan");
+var driver035 = new driver("Santiago", 5, 3, 4, 8, 5, 9, 0, 0, 200, 2, 0, "Alphacom", "Red", "Cyan");
+var driver036 = new driver("Blaese", 5, 1, 6, 7, 6, 8, 0, 0, 200, 3, 0, "Alphacom", "Red", "Cyan");
+var driver037 = new driver("McGrath", 5, 1, 2, 3, 10, 7, 0, 0, 200, 2, 0, "Mountain Systems", "Gray", "White");
+var driver038 = new driver("Beck", 4, 5, 10, 3, 2, 1, 0, 0, 200, 4, 0, "Mountain Systems", "Gray", "White");
+var driver039 = new driver("Abbasov", 4, 5, 9, 6, 3, 6, 0, 0, 200, 10, 0, "Star Limited Racing", "Yellow", "Gray");
+var driver040 = new driver("Gonzales", 4, 4, 9, 6, 0, 8, 0, 0, 200, 9, 0, "Star Limited Racing", "Yellow", "Gray");
+var driver041 = new driver("Rodgers", 4, 4, 7, 10, 1, 3, 0, 0, 200, 1, 0, "Victoire Motorsports", "Red", "Silver");
+var driver042 = new driver("Dubois", 4, 5, 1, 10, 5, 3, 0, 0, 200, 7, 0, "Victoire Motorsports", "Red", "Silver");
+var driver043 = new driver("Chang", 4, 5, 9, 9, 3, 6, 0, 0, 200, 2, 0, "Pearl Electronics", "Red", "Pink");
+var driver044 = new driver("Bryant", 4, 5, 8, 2, 4, 5, 0, 0, 200, 7, 0, "Pearl Electronics", "Red", "Pink");
+var driver045 = new driver("Patterson", 4, 2, 1, 6, 3, 4, 0, 0, 200, 9, 0, "North Star Motors", "Orange", "Black");
+var driver046 = new driver("Daniel", 4, 1, 7, 7, 4, 4, 0, 0, 200, 7, 0, "North Star Motors", "Orange", "Black");
+var driver047 = new driver("Jackson", 4, 2, 5, 8, 6, 0, 0, 0, 200, 3, 0, "American Racing Revival", "White", "Blue");
+var driver048 = new driver("Wood", 4, 3, 8, 0, 4, 6, 0, 0, 200, 10, 0, "American Racing Revival", "White", "Blue");
+var driver049 = new driver("Fletcher", 4, 3, 1, 7, 8, 2, 0, 0, 200, 10, 0, "Fletcher Racing", "Green", "Blue");
+var driver050 = new driver("Lawernce", 4, 3, 4, 2, 5, 2, 0, 0, 200, 7, 0, "Fletcher Racing", "Green", "Blue");
+var driver051 = new driver("Robertson", 4, 5, 3, 4, 0, 6, 0, 0, 200, 2, 0, "Antler Motors", "Blue", "Yellow");
+var driver052 = new driver("Logan", 4, 4, 0, 9, 7, 3, 0, 0, 200, 7, 0, "Antler Motors", "Blue", "Yellow");
+var driver053 = new driver("Faulkner", 4, 3, 10, 1, 0, 9, 0, 0, 200, 5, 0, "Quad Security", "Purple", "Silver");
+var driver054 = new driver("Porter", 4, 3, 9, 10, 7, 9, 0, 0, 200, 9, 0, "Quad Security", "Purple", "Silver");
+var driver055 = new driver("Carter", 4, 3, 2, 10, 7, 4, 0, 0, 200, 7, 0, "Tempest Limited", "Orange", "Blue");
+var driver056 = new driver("Willis", 4, 1, 4, 2, 4, 0, 0, 0, 200, 4, 0, "Tempest Limited", "Orange", "Blue");
+var driver057 = new driver("Schmidt", 4, 3, 8, 4, 5, 6, 0, 0, 200, 6, 0, "Speed Demons", "Black", "Red");
+var driver058 = new driver("Barnett", 4, 5, 5, 5, 5, 7, 0, 0, 200, 5, 0, "Speed Demons", "Black", "Red");
+var driver059 = new driver("Lietner", 4, 2, 1, 4, 7, 2, 0, 0, 200, 8, 0, "Smokin' Axles", "Silver", "Red");
+var driver060 = new driver("Stephens", 4, 4, 7, 0, 4, 9, 0, 0, 200, 9, 0, "Smokin' Axles", "Silver", "Red");
+var driver061 = new driver("Pierce", 4, 4, 0, 2, 9, 1, 0, 0, 200, 8, 0, "Gorilla Solutions", "Gray", "Orange");
+var driver062 = new driver("Burgess", 4, 4, 7, 5, 9, 6, 0, 0, 200, 7, 0, "Gorilla Solutions", "Gray", "Orange");
+var driver063 = new driver("Rogers", 4, 3, 8, 7, 9, 5, 0, 0, 200, 4, 0, "Omegashine", "Purple", "Black");
+var driver064 = new driver("Brewer", 4, 3, 2, 5, 8, 5, 0, 0, 200, 8, 0, "Omegashine", "Purple", "Black");
+var driver065 = new driver("Brunner", 4, 1, 8, 10, 7, 5, 0, 0, 200, 2, 0, "Brunner Racing", "Black", "Green");
+var driver066 = new driver("Doyle", 4, 3, 0, 1, 9, 4, 0, 0, 200, 10, 0, "Brunner Racing", "Black", "Green");
+var driver067 = new driver("Flowers", 4, 4, 5, 10, 10, 9, 0, 0, 200, 7, 0, "Lion Motors", "Yellow", "Green");
+var driver068 = new driver("Gibbs", 4, 5, 5, 8, 5, 10, 0, 0, 200, 1, 0, "Lion Motors", "Yellow", "Green");
+var driver069 = new driver("Perez", 4, 5, 6, 5, 10, 8, 0, 0, 200, 6, 0, "Whirlwind Entertainment", "Gray", "Blue");
+var driver070 = new driver("Grant", 4, 4, 2, 3, 8, 6, 0, 0, 200, 6, 0, "Whirlwind Entertainment", "Gray", "Blue");
+var driver071 = new driver("Fox", 4, 3, 9, 2, 10, 8, 0, 0, 200, 8, 0, "Phoenixtime", "Red", "Orange");
+var driver072 = new driver("Hampton", 4, 1, 4, 1, 7, 0, 0, 0, 200, 0, 0, "Phoenixtime", "Red", "Orange");
+var driver073 = new driver("Fournier", 4, 4, 5, 0, 3, 9, 0, 0, 200, 2, 0, "Overdrive", "Silver", "White");
+var driver074 = new driver("Alexander", 4, 4, 0, 1, 10, 4, 0, 0, 200, 7, 0, "Overdrive", "Silver", "White");
+var driver075 = new driver("Lowe", 4, 2, 2, 10, 9, 6, 0, 0, 200, 3, 0, "Hammer Force", "Orange", "Green");
+var driver076 = new driver("Ali", 4, 1, 0, 3, 5, 6, 0, 0, 200, 4, 0, "Hammer Force", "Orange", "Green");
+var driver077 = new driver("Frei", 4, 1, 1, 5, 9, 3, 0, 0, 200, 3, 0, "Apex Motorsports", "Yellow", "Blue");
+var driver078 = new driver("Moreno", 4, 3, 10, 0, 10, 9, 0, 0, 200, 6, 0, "Apex Motorsports", "Yellow", "Blue");
+var driver079 = new driver("Karlsson", 4, 2, 0, 0, 4, 8, 0, 0, 200, 4, 0, "Nimble Velocity", "Yellow", "Black");
+var driver080 = new driver("Vlahos", 4, 4, 3, 1, 10, 10, 0, 0, 200, 6, 0, "Nimble Velocity", "Yellow", "Black");
+var driver081 = new driver("Peters", 3, 3, 5, 7, 0, 0, 0, 0, 200, 6, 0, "Valkyrie Entertainment", "Cyan", "Red");
+var driver082 = new driver("Francis", 3, 5, 7, 9, 2, 5, 0, 0, 200, 8, 0, "Valkyrie Entertainment", "Cyan", "Red");
+var driver083 = new driver("Thomas", 3, 1, 8, 6, 0, 3, 0, 0, 200, 8, 0, "Thomas Racing", "Purple", "Yellow");
+var driver084 = new driver("Rasulov", 3, 5, 3, 7, 6, 0, 0, 0, 200, 9, 0, "Thomas Racing", "Purple", "Yellow");
+var driver085 = new driver("Robinson", 3, 3, 7, 9, 5, 2, 0, 0, 200, 9, 0, "Oak Solutions", "Gray", "Purple");
+var driver086 = new driver("Figueroa", 3, 2, 9, 0, 1, 2, 0, 0, 200, 9, 0, "Oak Solutions", "Gray", "Purple");
+var driver087 = new driver("McGee", 3, 2, 6, 6, 1, 4, 0, 0, 200, 6, 0, "Rush Media", "Silver", "Blue");
+var driver088 = new driver("Ferguson", 3, 4, 6, 9, 3, 5, 0, 0, 200, 5, 0, "Rush Media", "Silver", "Blue");
+var driver089 = new driver("Mitchell", 3, 4, 10, 8, 4, 5, 0, 0, 200, 3, 0, "Drinking Chaps", "Cyan", "Purple");
+var driver090 = new driver("Wolf", 3, 5, 7, 6, 9, 4, 0, 0, 200, 10, 0, "Drinking Chaps", "Cyan", "Purple");
+var driver091 = new driver("George", 3, 2, 8, 1, 1, 3, 0, 0, 200, 4, 0, "George Racing", "White", "Purple");
+var driver092 = new driver("Hall", 3, 2, 8, 5, 0, 5, 0, 0, 200, 2, 0, "George Racing", "White", "Purple");
+var driver093 = new driver("Evans", 3, 1, 5, 8, 2, 6, 0, 0, 200, 7, 0, "Malkovich Racing", "Red", "Blue");
+var driver094 = new driver("Caldwell", 3, 3, 9, 4, 7, 5, 0, 0, 200, 9, 0, "Malkovich Racing", "Red", "Blue");
+var driver095 = new driver("Norman", 3, 5, 1, 7, 4, 6, 0, 0, 200, 6, 0, "Barlow Racing", "Orange", "Gray");
+var driver096 = new driver("Cartwright", 3, 3, 7, 3, 6, 0, 0, 0, 200, 2, 0, "Barlow Racing", "Orange", "Gray");
+var driver097 = new driver("Berry", 3, 3, 3, 0, 1, 8, 0, 0, 200, 8, 0, "Ridgeco", "Yellow", "Brown");
+var driver098 = new driver("Middleton", 3, 2, 2, 6, 7, 5, 0, 0, 200, 10, 0, "Ridgeco", "Yellow", "Brown");
+var driver099 = new driver("Morris", 3, 4, 2, 3, 6, 2, 0, 0, 200, 3, 0, "The Triple Clutchers", "Black", "Cyan");
+var driver100 = new driver("Soto", 3, 2, 6, 1, 3, 4, 0, 0, 200, 3, 0, "The Triple Clutchers", "Black", "Cyan");
+var driver101 = new driver("Williamson", 3, 4, 4, 4, 8, 5, 0, 0, 200, 7, 0, "Dinosaur Motors", "Brown", "Green");
+var driver102 = new driver("Khan", 3, 2, 9, 4, 8, 1, 0, 0, 200, 1, 0, "Dinosaur Motors", "Brown", "Green");
+var driver103 = new driver("McKinney", 3, 4, 10, 3, 8, 8, 0, 0, 200, 7, 0, "Aura Motors", "Red", "Yellow");
+var driver104 = new driver("Manning", 3, 4, 1, 9, 7, 9, 0, 0, 200, 9, 0, "Aura Motors", "Red", "Yellow");
+var driver105 = new driver("Kent", 3, 4, 0, 6, 3, 6, 0, 0, 200, 2, 0, "Pixel Technologies", "Yellow", "Red");
+var driver106 = new driver("Greene", 3, 1, 5, 10, 7, 5, 0, 0, 200, 4, 0, "Pixel Technologies", "Yellow", "Red");
+var driver107 = new driver("Moore", 3, 3, 2, 8, 8, 3, 0, 0, 200, 3, 0, "Centaure Motor Works", "Green", "Orange"); 
+var driver108 = new driver("Tate", 3, 2, 6, 5, 6, 4, 0, 0, 200, 2, 0, "Centaure Motor Works", "Green", "Orange");
+var driver109 = new driver("Ward", 3, 4, 0, 6, 3, 9, 0, 0, 200, 5, 0, "Swift Racing", "Orange", "White"); 
+var driver110 = new driver("Watkins", 3, 5, 6, 4, 9, 10, 0, 0, 200, 9, 0, "Swift Racing", "Orange", "White");
+var driver111 = new driver("Powell", 3, 1, 1, 5, 10, 0, 0, 0, 200, 5, 0, "Donaldson Racing", "Red", "Gray"); 
+var driver112 = new driver("Hussain", 3, 1, 10, 2, 8, 6, 0, 0, 200, 5, 0, "Donaldson Racing", "Red", "Gray");
+var driver113 = new driver("Horton", 3, 5, 3, 0, 6, 4, 0, 0, 200, 0, 0, "Platt Racing", "Green", "Purple");
+var driver114 = new driver("Knowles", 3, 1, 0, 10, 10, 1, 0, 0, 200, 2, 0, "Platt Racing", "Green", "Purple");
+var driver115 = new driver("Chavez", 3, 1, 0, 5, 2, 6, 0, 0, 200, 0, 0, "Bridgemaster Tires", "Purple", "Blue");
+var driver116 = new driver("Davis", 3, 3, 8, 2, 10, 9, 0, 0, 200, 3, 0, "Bridgemaster Tires", "Purple", "Blue");
+var driver117 = new driver("Hancock", 3, 1, 1, 7, 8, 9, 0, 0, 200, 0, 0, "Robin Aviation", "Black", "Orange");
+var driver118 = new driver("Carlson", 2, 3, 1, 9, 0, 0, 0, 0, 200, 5, 0, "Robin Aviation", "Black", "Orange");
+var driver119 = new driver("Valencia", 2, 3, 3, 10, 1, 4, 0, 0, 200, 9, 0, "Pedal Pushers", "Black", "Silver");
+var driver120 = new driver("Zimmerman", 2, 5, 7, 10, 5, 5, 0, 0, 200, 9, 0, "Pedal Pushers", "Black", "Silver");
+var driver121 = new driver("Harper", 2, 2, 7, 6, 3, 2, 0, 0, 200, 8, 0, "Drift Kings", "Gold", "Black");
+var driver122 = new driver("Lee", 2, 5, 5, 10, 3, 4, 0, 0, 200, 5, 0, "Drift Kings", "Gold", "Black");
+var driver123 = new driver("Taylor", 2, 5, 8, 6, 5, 2, 0, 0, 200, 5, 0, "Beta Softwares", "Black", "Yellow");
+var driver124 = new driver("Hunt", 2, 1, 5, 4, 5, 0, 0, 0, 200, 10, 10, "Beta Softwares", "Black", "Yellow");
+var driver125 = new driver("Herrera", 2, 3, 7, 10, 7, 0, 0, 0, 200, 4, 0, "Herrera Racing", "Purple", "Orange");
+var driver126 = new driver("Lawson", 2, 5, 5, 6, 3, 3, 0, 0, 200, 3, 0, "Herrera Racing", "Purple", "Orange");
+var driver127 = new driver("O'Brien", 2, 3, 7, 7, 2, 4, 0, 0, 200, 3, 0, "Nolan Racing", "White", "Orange");
+var driver128 = new driver("Giovanni", 2, 5, 4, 3, 6, 4, 0, 0, 200, 10, 0, "Nolan Racing", "White", "Orange");
+var driver129 = new driver("Carpenter", 2, 3, 9, 4, 5, 0, 0, 0, 200, 2, 0, "Radiant Corporation", "Orange", "Yellow");
+var driver130 = new driver("Lloyd", 2, 1, 1, 2, 0, 4, 0, 0, 200, 10, 0, "Radiant Corporation", "Orange", "Yellow");
+var driver131 = new driver("Burns", 2, 3, 10, 7, 8, 1, 0, 0, 200, 3, 0, "Kowalski Racing", "Green", "White");
+var driver132 = new driver("Hardy", 2, 3, 8, 5, 0, 9, 0, 0, 200, 5, 0, "Kowalski Racing", "Green", "White");
+var driver133 = new driver("Jimenez", 2, 1, 9, 5, 2, 2, 0, 0, 200, 0, 0, "Pink Media", "Pink", "Black");
+var driver134 = new driver("Tran", 2, 4, 2, 9, 4, 4, 0, 0, 200, 3, 0, "Pink Media", "Pink", "Black");
+var driver135 = new driver("Bianchi", 2, 4, 8, 5, 3, 10, 0, 0, 200, 8, 0, "The Checkered Flags", "Black", "White");
+var driver136 = new driver("Young", 2, 2, 3, 8, 5, 5, 0, 0, 200, 8, 0, "The Checkered Flags", "Black", "White");
+var driver137 = new driver("Schneider", 2, 1, 10, 3, 10, 0, 0, 0, 200, 8, 0, "Road Blocks", "Gray", "Yellow");
+var driver138 = new driver("Byrne", 2, 1, 0, 9, 3, 0, 0, 0, 200, 1, 0, "Road Blocks", "Gray", "Yellow");
+var driver139 = new driver("Chen", 2, 1, 8, 0, 6, 1, 0, 0, 200, 6, 0, "Odinetworks", "Green", "Orange");
+var driver140 = new driver("Riley", 2, 5, 6, 1, 5, 8, 0, 0, 200, 9, 0, "Odinetworks", "Green", "Orange");
+var driver141 = new driver("Casey", 2, 2, 1, 2, 3, 6, 0, 0, 200, 10, 0, "Legacy Motorsports", "Orange", "Purple");
+var driver142 = new driver("Harris", 2, 5, 4, 8, 7, 3, 0, 0, 200, 0, 0, "Legacy Motorsports", "Orange", "Purple");
+var driver143 = new driver("Rosales", 2, 1, 5, 5, 8, 3, 0, 0, 200, 8, 0, "The Generals of Motor", "Navy", "Red");
+var driver144 = new driver("Jensen", 2, 2, 4, 4, 7, 0, 0, 0, 200, 2, 0, "The Generals of Motor", "Navy", "Red");
+var driver145 = new driver("Sawyer", 2, 3, 10, 2, 9, 2, 0, 0, 200, 3, 0, "Berry Limited", "Pink", "Blue");
+var driver146 = new driver("Campbell", 2, 3, 5, 0, 8, 3, 0, 0, 200, 7, 0, "Berry Limited", "Pink", "Blue");
+var driver147 = new driver("Bass", 2, 3, 4, 1, 7, 1, 0, 0, 200, 3, 0, "Prodigy Industries", "White", "Green");
+var driver148 = new driver("Finn", 2, 2, 0, 3, 5, 4, 0, 0, 200, 7, 0, "Prodigy Industries", "White", "Green");
+var driver149 = new driver("Garrett", 2, 4, 5, 2, 6, 8, 0, 0, 200, 8, 0, "Jade Drifters", "Green", "Black");
+var driver150 = new driver("Marquez", 2, 3, 1, 8, 9, 2, 0, 0, 200, 4, 0, "Jade Drifters", "Green", "Black");
+var driver151 = new driver("Douglas", 2, 2, 1, 8, 6, 1, 0, 0, 200, 0, 0, "Explority", "Blue", "Gray");
+var driver152 = new driver("Bowden", 2, 5, 4, 10, 9, 6, 0, 0, 200, 3, 0, "Explority", "Blue", "Gray");
+var driver153 = new driver("Aziz", 2, 1, 4, 7, 7, 5, 0, 0, 200, 6, 0, "Parker Racing", "Cyan", "White");
+var driver154 = new driver("Palmer", 2, 5, 6, 3, 6, 6, 0, 0, 200, 1, 0, "Parker Racing", "Cyan", "White");
+var driver155 = new driver("Marsh", 2, 4, 3, 7, 8, 6, 0, 0, 200, 4, 0, "Delta Blue Engineering", "Blue", "White");
+var driver156 = new driver("Rinaldi", 2, 4, 2, 9, 10, 3, 0, 0, 200, 0, 0, "Delta Blue Engineering", "Blue", "White");
+var driver157 = new driver("Clarke", 2, 2, 1, 2, 3, 4, 0, 0, 200, 0, 0, "Triumph Motorsports", "Purple", "White");
+var driver158 = new driver("Howell", 2, 3, 9, 2, 9, 5, 0, 0, 200, 1, 0, "Triumph Motorsports", "Purple", "White");
+var driver159 = new driver("Roy", 2, 4, 0, 9, 6, 9, 0, 0, 200, 2, 0, "Ace Networks", "Orange", "Silver");
+var driver160 = new driver("Wong", 2, 2, 3, 3, 9, 5, 0, 0, 200, 5, 0, "Ace Networks", "Orange", "Silver");
+var driver161 = new driver("Chambers", 2, 1, 7, 5, 7, 9, 0, 0, 200, 5, 0, "Engineering Schmengineering", "Purple", "Red");
+var driver162 = new driver("Park", 2, 2, 9, 7, 8, 9, 0, 0, 200, 1, 0, "Engineering Schmengineering", "Purple", "Red");
+var driver163 = new driver("Dawson", 2, 5, 4, 4, 10, 7, 0, 0, 200, 1, 0, "Silver Lining Microsystems", "Silver", "Orange");
+var driver164 = new driver("Freeman", 2, 1, 0, 0, 10, 3, 0, 0, 200, 6, 0, "Silver Lining Microsystems", "Silver", "Orange");
+var driver165 = new driver("Sanchez", 1, 2, 9, 8, 1, 4, 0, 0, 200, 10, 0, "Street Racers", "Green", "Red");
+var driver166 = new driver("Hartman", 1, 3, 7, 9, 1, 3, 0, 0, 200, 7, 0, "Street Racers", "Green", "Red");
+var driver167 = new driver("Johnston", 1, 3, 7, 5, 0, 5, 0, 0, 200, 9, 0, "Randall Racing", "Yellow", "Orange");
+var driver168 = new driver("Ling", 1, 5, 5, 2, 0, 1, 0, 0, 200, 4, 0, "Randall Racing", "Yellow", "Orange");
+var driver169 = new driver("Mason", 1, 3, 10, 0, 0, 3, 0, 0, 200, 6, 0, "Silver Bank", "Silver", "Purple");
+var driver170 = new driver("Owen", 1, 3, 2, 10, 0, 3, 0, 0, 200, 4, 0, "Silver Bank", "Silver", "Purple");
+var driver171 = new driver("Salo", 1, 5, 7, 5, 4, 0, 0, 0, 200, 1, 0, "G Force", "Silver", "Black");
+var driver172 = new driver("Fleming", 1, 3, 1, 9, 2, 3, 0, 0, 200, 5, 0, "G Force", "Silver", "Black");
+var driver173 = new driver("Butler", 1, 1, 9, 7, 9, 0, 0, 0, 200, 9, 0, "Butler Racing", "Blue", "Purple");
+var driver174 = new driver("Barnes", 1, 3, 1, 7, 5, 2, 0, 0, 200, 8, 0, "Butler Racing", "Blue", "Purple");
+var driver175 = new driver("Vargas", 1, 1, 1, 7, 2, 3, 0, 0, 200, 8, 0, "Pinnacle Motorsports", "Red", "Green");
+var driver176 = new driver("Bradley", 1, 1, 5, 8, 6, 1, 0, 0, 200, 7, 0, "Pinnacle Motorsports", "Red", "Green");
+var driver177 = new driver("Ortega", 1, 2, 8, 3, 5, 5, 0, 0, 200, 10, 0, "Quest Industries", "Silver", "Green");
+var driver178 = new driver("Griffin", 1, 4, 8, 9, 7, 3, 0, 0, 200, 3, 0, "Quest Industries", "Silver", "Green");
+var driver179 = new driver("Paul", 1, 2, 10, 3, 1, 4, 0, 0, 200, 1, 0, "Nero Technologies", "Black", "Gray");
+var driver180 = new driver("Holmes", 1, 1, 1, 2, 4, 1, 0, 0, 200, 9, 0, "Nero Technologies", "Black", "Gray");
+var driver181 = new driver("Carroll", 1, 5, 9, 5, 3, 6, 0, 0, 200, 1, 0, "Stick Shifters", "Cyan", "Black");
+var driver182 = new driver("Swanson", 1, 3, 7, 3, 9, 0, 0, 0, 200, 6, 0, "Stick Shifters", "Cyan", "Black");
+var driver183 = new driver("Cunningham", 1, 2, 6, 10, 8, 6, 0, 0, 200, 9, 0, "Wondertechs", "White", "Gray");
+var driver184 = new driver("Hamilton", 1, 4, 1, 10, 5, 6, 0, 0, 200, 5, 0, "Wondertechs", "White", "Gray");
+var driver185 = new driver("Craig", 1, 2, 6, 0, 6, 3, 0, 0, 200, 8, 0, "Monarch Productions", "Orange", "Red");
+var driver186 = new driver("Delgado", 1, 3, 10, 7, 10, 6, 0, 0, 200, 8, 0, "Monarch Productions", "Orange", "Red");
+var driver187 = new driver("McCann", 1, 1, 1, 4, 3, 0, 0, 0, 200, 1, 0, "McAllister Motorsports", "Gray", "Black");
+var driver188 = new driver("Carr", 1, 5, 1, 9, 9, 3, 0, 0, 200, 4, 0, "McAllister Motorsports", "Gray", "Black");
+var driver189 = new driver("Wheeler", 1, 3, 9, 9, 7, 9, 0, 0, 200, 6, 0, "Thornhill Racing", "Green", "Gray");
+var driver190 = new driver("Papadopoulos", 1, 3, 4, 0, 5, 1, 0, 0, 200, 2, 0, "Thornhill Racing", "Green", "Gray");
+var driver191 = new driver("Reid", 1, 4, 9, 3, 4, 10, 0, 0, 200, 3, 0, "Signal Navigation", "Yellow", "Silver");
+var driver192 = new driver("Cox", 1, 4, 2, 3, 7, 6, 0, 0, 200, 4, 0, "Signal Navigation", "Yellow", "Silver");
+var driver193 = new driver("Patrick", 1, 1, 1, 3, 2, 9, 0, 0, 200, 5, 0, "Blackman Racing", "Silver", "Gray");
+var driver194 = new driver("Heikkinen", 1, 2, 1, 7, 4, 9, 0, 0, 200, 2, 0, "Blackman Racing", "Silver", "Gray");
+var driver195 = new driver("Andrews", 1, 2, 3, 2, 6, 8, 0, 0, 200, 5, 0, "Golden Road Tires", "Gold", "Black");
+var driver196 = new driver("Wallace", 1, 4, 4, 0, 4, 9, 0, 0, 200, 1, 0, "Golden Road Tires", "Gold", "Black");
+var driver197 = new driver("Martin", 1, 1, 1, 0, 6, 5, 0, 0, 200, 4, 0, "Burnt Rubber", "Red", "Black");
+var driver198 = new driver("Bray", 1, 1, 3, 8, 10, 7, 0, 0, 200, 4, 0, "Burnt Rubber", "Red", "Black");
+var driver199 = new driver("Barton", 1, 1, 2, 4, 7, 10, 0, 0, 200, 5, 0, "Barton Racing", "Gray", "Green");
+var driver200 = new driver("Lucas", 1, 1, 4, 10, 10, 10, 0, 0, 200, 2, 0, "Barton Racing", "Gray", "Green");
+var Player = new driver("", 0, 0, 0, 0, 0, 0, 0, 999, 0, 10, 0);
+var Teammate = new driver("", 3, 3, 5, 5, 5, 5, 0, 0, 200, 5, 0);
+var driverlist = [none, driver001, driver002, driver003, driver004, driver005, driver006, driver007, driver008, driver009, driver010, driver011, driver012, driver013, driver014, driver015, driver016, driver017, driver018, driver019, driver020, driver021, driver022, driver023, driver024, driver025, driver026, driver027, driver028, driver029, driver030, driver031, driver032, driver033, driver034, driver035, driver036, driver037, driver038, driver039, driver040, driver041, driver042, driver043, driver044, driver045, driver046, driver047, driver048, driver049, driver050, driver051, driver052, driver053, driver054, driver055, driver056, driver057, driver058, driver059, driver060, driver061, driver062, driver063, driver064, driver065, driver066, driver067, driver068, driver069, driver070, driver071, driver072, driver073, driver074, driver075, driver076, driver077, driver078, driver079, driver080, driver081, driver082, driver083, driver084, driver085, driver086, driver087, driver088, driver089, driver090, driver091, driver092, driver093, driver094, driver095, driver096, driver097, driver098, driver099, driver100, driver101, driver102, driver103, driver104, driver105, driver106, driver107, driver108, driver109, driver110, driver111, driver112, driver113, driver114, driver115, driver116, driver117, driver118, driver119, driver120, driver121, driver122, driver123, driver124, driver125, driver126, driver127, driver128, driver129, driver130, driver131, driver132, driver133, driver134, driver135, driver136, driver137, driver138, driver139, driver140, driver141, driver142, driver143, driver144, driver145, driver146, driver147, driver148, driver149, driver150, driver151, driver152, driver153, driver154, driver155, driver156, driver157, driver158, driver159, driver160, driver161, driver162, driver163, driver164, driver165, driver166, driver167, driver168, driver169, driver170, driver171, driver172, driver173, driver174, driver175, driver176, driver177, driver178, driver179, driver180, driver181, driver182, driver183, driver184, driver185, driver186, driver187, driver188, driver189, driver190, driver191, driver192, driver193, driver194, driver195, driver196, driver197, driver198, driver199, driver200, Player, Teammate];
+//1=19%
+//2=26%
+//3=26%
+//4=26%
+//5=2%
+//6=1%
+
+window.onload = function() {
+    alert("Hello, welcome.  Over the next few pages you will insert your team, driver, and teammates name.  As well as how many races you would like to run.  Also, if you are unfamiliar with the rules please click how to play. (WARNING THERE ARE A LOT OF ALERTS.)");
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr');
+    var a = document.getElementById("card0");
+    var b = document.getElementById("card1");
+    var c = document.getElementById("card2");
+    var d = document.getElementById("card3");
+    var e = document.getElementById("card4");
+    var f = document.getElementById("card5");
+    var g = document.getElementById("card6");
+    var h = document.getElementById("card7");
+    var i = document.getElementById("card8");
+    var z = document.getElementById("tableCard");
+    var lapsT = document.getElementById("lapsT");
+    var lapsD = document.getElementById("lapsD");
+    var racesT = document.getElementById("racesT");
+    var PL = document.getElementById("PL");
+    var Pass = document.getElementById("Pass");
+    var Tires = document.getElementById("Tires");
+    var N01 = document.getElementById("N01");
+    var DName01 = document.getElementById("DName01");
+    var TN01 = document.getElementById("TN01");
+    var N02 = document.getElementById("N02");
+    var DName02 = document.getElementById("DName02");
+    a.innerHTML = speed [Math.floor(Math.random() * 5)];
+    b.innerHTML = speed [Math.floor(Math.random() * 5)];
+    c.innerHTML = speed [Math.floor(Math.random() * 5)];
+    d.innerHTML = speed [Math.floor(Math.random() * 5)];
+    e.innerHTML = speed [Math.floor(Math.random() * 5)];
+    f.innerHTML = speed [Math.floor(Math.random() * 5)];
+    g.innerHTML = "N";
+    h.innerHTML = "N";
+    i.innerHTML = "N";
+    z.innerHTML = "N";
+    getWeather();
+    lapsT.innerHTML = Math.floor(Math.random()*16+20);
+    lapsD.innerHTML = "Q";
+    racesT.innerHTML = prompt("Enter the number of races you would like to run this season.");
+    racesTT.innerHTML = racesT.innerHTML;
+    PL.innerHTML = +Math.floor(Math.random()*5000+20000)/1000;
+    Pass.innerHTML = +Math.floor(Math.random()*1000+250)/1000;
+    Tires.innerHTML = 20;
+    TN01.innerHTML = prompt("Enter your team name.");
+    driverlist[201].team = TN01.innerHTML;
+    driverlist[202].team = TN01.innerHTML;
+    N01.innerHTML = prompt("Enter driver name.");
+    DName01.innerHTML = N01.innerHTML;
+    N02.innerHTML = prompt("Enter your teammates name.");
+    DName02.innerHTML = N02.innerHTML;
+    driverlist[202].name = N02.innerHTML;
+    for(var i = 3; i <= DC; i += 2) {
+    var rowp = document.getElementById("position").insertRow(i);
+    var cell0 = rowp.insertCell(0);
+    var rowr = document.getElementById("rank").insertRow(i);
+    var cell1 = rowr.insertCell(0);
+    var cell2 = rowr.insertCell(1);
+    var cell3 = rowr.insertCell(2);
+    var rowdp = document.getElementById("driverposition").insertRow(i);
+    var cell0 = rowdp.insertCell(0);
+    var rowdr = document.getElementById("driverStandings").insertRow(i);
+    var cell1 = rowdr.insertCell(0);
+    var cell2 = rowdr.insertCell(1);
+    var cell3 = rowdr.insertCell(2);
+    var cell4 = rowdr.insertCell(3);
+    var rowtp = document.getElementById("teamposition").insertRow(i/2+.5);
+    var cell0 = rowtp.insertCell(0);
+    var rowtr = document.getElementById("teamStandings").insertRow(i/2+.5);
+    var cell1 = rowtr.insertCell(0);
+    var cell2 = rowtr.insertCell(1);
+    var cell3 = rowtr.insertCell(2);
+    var cell4 = rowtr.insertCell(3);
+    document.getElementById("position").rows[i].getElementsByTagName('td').item(0).innerHTML = i;
+    rowr.id = "racer"+(i);
+    document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML = nums[(i-1)/2];
+     document.getElementById("rank").rows[i].getElementsByTagName('td').item(1).innerHTML = 0;
+    document.getElementById("rank").rows[i].getElementsByTagName('td').item(0).innerHTML = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].name;
+    driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].pit = Math.floor(document.getElementById("lapsT").innerHTML/3)+Math.floor(Math.random()*11-3);
+    document.getElementById("rank").rows[i].style.backgroundColor = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].teamcolor;
+    document.getElementById("rank").rows[i].style.color = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].teamfont;
+    document.getElementById("position").rows[i].style.backgroundColor = "white";
+    document.getElementById("position").rows[i].style.fontSize = "18px";
+    document.getElementById("position").rows[i].style.textAlign = "center";
+    document.getElementById("position").rows[i].style.fontWeight = "bold";
+    document.getElementById("rank").rows[i].style.fontSize = "18px";
+    document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).style.fontSize = "10px";
+    document.getElementById("rank").rows[i].getElementsByTagName('td').item(1).style.textAlign = "right";
+    document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).style.textAlign = "right";
+    document.getElementById("rank").rows[i].style.fontWeight = "bold";
+    document.getElementById("driverposition").rows[i].getElementsByTagName('td').item(0).innerHTML = i;
+    rowr.id = "racer"+(i);
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(3).innerHTML = nums[(i-1)/2];
+     document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(1).innerHTML = 0;
+     document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(2).innerHTML = 0;
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(0).innerHTML = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].name;
+    document.getElementById("driverStandings").rows[i].style.backgroundColor = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].teamcolor;
+    document.getElementById("driverStandings").rows[i].style.color = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].teamfont;
+    document.getElementById("driverposition").rows[i].style.backgroundColor = "white";
+    document.getElementById("driverposition").rows[i].style.fontSize = "18px";
+    document.getElementById("driverposition").rows[i].style.textAlign = "center";
+    document.getElementById("driverposition").rows[i].style.fontWeight = "bold";
+    document.getElementById("driverStandings").rows[i].style.fontSize = "18px";
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(2).style.fontSize = "16px";
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(3).style.fontSize = "10px";
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(1).style.textAlign = "right";
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(2).style.textAlign = "right";
+    document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(3).style.textAlign = "right";
+    document.getElementById("driverStandings").rows[i].style.fontWeight = "bold";
+    document.getElementById("teamposition").rows[i/2+.5].getElementsByTagName('td').item(0).innerHTML = i/2+.5;
+    rowr.id = "racer"+(i/2+.5);
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(3).innerHTML = nums[(i-1)/2];
+     document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(1).innerHTML = 0;
+     document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(2).innerHTML = 0;
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(0).innerHTML = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].team;
+    document.getElementById("teamStandings").rows[i/2+.5].style.backgroundColor = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].teamcolor;
+    document.getElementById("teamStandings").rows[i/2+.5].style.color = driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].teamfont;
+    document.getElementById("teamposition").rows[i/2+.5].style.backgroundColor = "white";
+    document.getElementById("teamposition").rows[i/2+.5].style.fontSize = "18px";
+    document.getElementById("teamposition").rows[i/2+.5].style.textAlign = "center";
+    document.getElementById("teamposition").rows[i/2+.5].style.fontWeight = "bold";
+    document.getElementById("teamStandings").rows[i/2+.5].style.fontSize = "18px";
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(2).style.fontSize = "16px";
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(3).style.fontSize = "10px";
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(1).style.textAlign = "right";
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(2).style.textAlign = "right";
+    document.getElementById("teamStandings").rows[i/2+.5].getElementsByTagName('td').item(3).style.textAlign = "right";
+    document.getElementById("teamStandings").rows[i/2+.5].style.fontWeight = "bold";
+    if (DC-i > 0) {
+    var rowp = document.getElementById("position").insertRow(i+1);
+    var cell0 = rowp.insertCell(0);
+    var rowr = document.getElementById("rank").insertRow(i+1);
+    var cell1 = rowr.insertCell(0);
+    var cell2 = rowr.insertCell(1);
+    var cell3 = rowr.insertCell(2);
+    var rowdp = document.getElementById("driverposition").insertRow(i+1);
+    var cell0 = rowdp.insertCell(0);
+    var rowdr = document.getElementById("driverStandings").insertRow(i+1);
+    var cell1 = rowdr.insertCell(0);
+    var cell2 = rowdr.insertCell(1);
+    var cell3 = rowdr.insertCell(2);
+    var cell4 = rowdr.insertCell(3);
+    document.getElementById("position").rows[i+1].getElementsByTagName('td').item(0).innerHTML = i+1;
+    rowr.id = "racer"+(i+1);
+    document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML = nums[(i-1)/2]+1;
+     document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(1).innerHTML = 0;
+    document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(0).innerHTML = driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].name;
+    driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].pit = Math.floor(document.getElementById("lapsT").innerHTML/3)+Math.floor(Math.random()*11-3);
+    document.getElementById("rank").rows[i+1].style.backgroundColor = driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].teamcolor;
+    document.getElementById("rank").rows[i+1].style.color = driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].teamfont;
+    document.getElementById("position").rows[i+1].style.backgroundColor = "white";
+    document.getElementById("position").rows[i+1].style.fontSize = "18px";
+    document.getElementById("position").rows[i+1].style.textAlign = "center";
+    document.getElementById("position").rows[i+1].style.fontWeight = "bold";
+    document.getElementById("rank").rows[i+1].style.fontSize = "18px";
+    document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).style.fontSize = "10px";
+    document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(1).style.textAlign = "right";
+    document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).style.textAlign = "right";
+    document.getElementById("rank").rows[i+1].style.fontWeight = "bold";
+    document.getElementById("driverposition").rows[i+1].getElementsByTagName('td').item(0).innerHTML = i+1;
+    rowr.id = "racer"+(i+1);
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(3).innerHTML = nums[(i-1)/2]+1;
+     document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(1).innerHTML = 0;
+     document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(2).innerHTML = 0;
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(0).innerHTML = driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].name;
+    document.getElementById("driverStandings").rows[i+1].style.backgroundColor = driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].teamcolor;
+    document.getElementById("driverStandings").rows[i+1].style.color = driverlist[document.getElementById("rank").rows[i+1].getElementsByTagName('td').item(2).innerHTML].teamfont;
+    document.getElementById("driverposition").rows[i+1].style.backgroundColor = "white";
+    document.getElementById("driverposition").rows[i+1].style.fontSize = "18px";
+    document.getElementById("driverposition").rows[i+1].style.textAlign = "center";
+    document.getElementById("driverposition").rows[i+1].style.fontWeight = "bold";
+    document.getElementById("driverStandings").rows[i+1].style.fontSize = "18px";
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(2).style.fontSize = "16px";
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(3).style.fontSize = "10px";
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(1).style.textAlign = "right";
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(2).style.textAlign = "right";
+    document.getElementById("driverStandings").rows[i+1].getElementsByTagName('td').item(3).style.textAlign = "right";
+    document.getElementById("driverStandings").rows[i+1].style.fontWeight = "bold";
+    } }
+    colorize(a); colorize(b); colorize(c); colorize(d); colorize(e); colorize(f); colorize(g); colorize(h); colorize(i);  colorize(z); 
+}
+
+function nextRace() {
+    if (document.getElementById("lapsD").innerHTML == "Race Over") {if (document.getElementById("racesD").innerHTML != "Season Over") {
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr');
+    var a = document.getElementById("card0");
+    var b = document.getElementById("card1");
+    var c = document.getElementById("card2");
+    var d = document.getElementById("card3");
+    var e = document.getElementById("card4");
+    var f = document.getElementById("card5");
+    var g = document.getElementById("card6");
+    var h = document.getElementById("card7");
+    var i = document.getElementById("card8");
+    var z = document.getElementById("tableCard");
+    var lapsT = document.getElementById("lapsT");
+    var lapsD = document.getElementById("lapsD");
+    var PL = document.getElementById("PL");
+    var Pass = document.getElementById("Pass");
+    var Tires = document.getElementById("Tires");
+    document.getElementById("racesD").innerHTML = +racesD.innerHTML+1;
+    document.getElementById("racesDT").innerHTML = +racesDT.innerHTML+1;
+    a.innerHTML = speed [Math.floor(Math.random() * 5)];
+    b.innerHTML = speed [Math.floor(Math.random() * 5)];
+    c.innerHTML = speed [Math.floor(Math.random() * 5)];
+    d.innerHTML = speed [Math.floor(Math.random() * 5)];
+    e.innerHTML = speed [Math.floor(Math.random() * 5)];
+    f.innerHTML = speed [Math.floor(Math.random() * 5)];
+    g.innerHTML = "N";
+    h.innerHTML = "N";
+    i.innerHTML = "N";
+    z.innerHTML = "N";
+    getWeather();
+    lapsT.innerHTML = Math.floor(Math.random()*16+20);
+    lapsD.innerHTML = "Q";
+    PL.innerHTML = +Math.floor(Math.random()*5000+20000)/1000;
+    Pass.innerHTML = +Math.floor(Math.random()*1000+250)/1000;
+    Tires.innerHTML = 20;
+    for (i = 1; i <= rowData.length; i++) {
+        document.getElementById("rank").rows[i].getElementsByTagName('td').item(1).innerHTML = 0;
+    driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].damage = 0;
+    driverlist[document.getElementById("rank").rows[i].getElementsByTagName('td').item(2).innerHTML].pit = Math.floor(document.getElementById("lapsT").innerHTML/3)+Math.floor(Math.random()*11-3);
+    }
+    colorize(a); colorize(b); colorize(c); colorize(d); colorize(e); colorize(f); colorize(g); colorize(h); colorize(i);  colorize(z); 
+}   else {alert("The current season is over. If you would like to play again please restart the game.")
+} } else {alert("Please finish the current race.");
+} }
+
+function driver(name, skill, consis, attack, defend, off, wall, damage, pit, tirewear, tiremanage, points, team, teamcolor, teamfont)
+{
+    this.name = name;
+    this.skill = skill;
+    this.consis = consis;
+    this.attack = attack;
+    this.defend = defend;
+    this.off = off;
+    this.wall = wall;
+    this.damage = damage;
+    this.pit = pit;
+    this.tirewear = tirewear;
+    this.tiremanage = tiremanage;
+    this.points = points;
+    this.team = team;
+    this.teamcolor = teamcolor;
+    this.teamfont = teamfont;
+}
+
+function colorize(card) {
+    switch (card.innerHTML) {
+    case "+1":
+    card.style.backgroundColor = "#DF0001";
+    card.style.color = "white";
+    card.style.fontSize = "25px";
+    break;
+    case "+2":
+    card.style.backgroundColor = "#FFD302";
+    card.style.color = "white";
+    card.style.fontSize = "25px";
+    break;
+    case "+3":
+    card.style.backgroundColor = "#019B4A";
+    card.style.color = "white";
+    card.style.fontSize = "25px";
+    break;
+    case "+4":
+    card.style.backgroundColor = "#0093E1";
+    card.style.color = "white";
+    card.style.fontSize = "25px";
+    break;
+    case "+5":
+    card.style.backgroundColor = "#808080";
+    card.style.color = "white";
+    card.style.fontSize = "25px";
+    break;
+    case "N":
+    card.style.backgroundColor = "white";
+    card.style.color = "white";
+    break;
+    case "Race Over":
+    card.style.backgroundColor = "black";
+    card.style.color = "white";
+    card.style.fontSize = "25px";
+    break;
+    } ;
+}
+function playCard(cardID) {
+    if (driverlist[201].damage < 5) {
+    var a = document.getElementById("card0");
+    var b = document.getElementById("card1");
+    var c = document.getElementById("card2");
+    var d = document.getElementById("card3");
+    var e = document.getElementById("card4");
+    var f = document.getElementById("card5");
+    var g = document.getElementById("card6");
+    var h = document.getElementById("card7");
+    var i = document.getElementById("card8");
+    var z = document.getElementById("tableCard");
+    switch (cardID) {
+    case "aa":
+    putCard(a);
+    break;
+    case "bb":
+    putCard(b);
+    break;
+    case "cc":
+    putCard(c);
+    break;
+    case "dd":
+    putCard(d);
+    break;
+    case "ee":
+    putCard(e);
+    break;
+    case "ff":
+    putCard(f);
+    break;
+    case "gg":
+    putCard(g);
+    break;
+    case "hh":
+    putCard(h);
+    break;
+    case "ii":
+    putCard(i);
+    break;
+    } } }
+function putCard(playedCard) {
+    var z = document.getElementById("tableCard") ;
+    switch (playedCard.innerHTML) {
+    case "+1":
+    if (z.innerHTML == "N") {
+    z.innerHTML = "+1";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+500)/1000;
+    OTT = Math.random()*100;
+    if (OTT < 1+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.01)
+    {alert("You make contact with the wall...");
+    DTP()};
+    } 
+    else if (z.innerHTML == "+1" || z.innerHTML == "+2" || z.innerHTML == "+3" || z.innerHTML == "+4" || z.innerHTML =="+5") {
+    z.innerHTML = "N";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+500)/1000;
+    OTT = Math.random()*100;
+    if (OTT < 1+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.01)
+    {alert("You make contact with the wall...");
+    DTP()};
+    nextlap();}
+    else;
+    break;
+    case "+2":
+    if (z.innerHTML == "N") {
+    z.innerHTML = "+2";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+1500)/1000;
+    OTT = Math.random()*100;
+    if (OTT < 2+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.03)
+    {alert("You make contact with the wall...");
+    DTP()};}
+    else if (z.innerHTML == "+1" || z.innerHTML == "+2") {
+    z.innerHTML = "N";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+1500)/1000;
+    OTT = Math.random()*100;
+    if (OTT < 2+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.03)
+    {alert("You make contact with the wall...");
+    DTP()};
+    nextlap();}
+    else;
+    break;
+    case "+3":
+    if (z.innerHTML == "N"){
+    z.innerHTML = "+3";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+2500)/1000;
+    OTT = Math.random()*100;
+    if (OTT < 3+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.05)
+    {alert("You make contact with the wall...");
+    DTP()};}
+    else if (z.innerHTML == "+1") {
+    z.innerHTML = "N";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+2500)/1000;
+    OTT = Math.random()*100;
+    if (OTT < 3+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.05)
+    {alert("You make contact with the wall...");
+    DTP()};
+    nextlap();}
+    else;
+    break;
+    case "+4":
+    if (z.innerHTML == "N") {
+    z.innerHTML = "+4";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+3500)/1000;
+    Tires.innerHTML -= 1;
+    OTT = Math.random()*100;
+    if (OTT < 4+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.07)
+    {alert("You make contact with the wall...");
+    DTP()};}
+    else if (z.innerHTML == "+1") {
+    z.innerHTML = "N";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+3500)/1000;
+    Tires.innerHTML -= 1;
+    OTT = Math.random()*100;
+    if (OTT < 4+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.07)
+    {alert("You make contact with the wall...");
+    DTP()};
+    nextlap();}
+    else;
+    break;
+    case "+5":
+    if (z.innerHTML == "N") {
+    z.innerHTML = "+5";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+4500)/1000;
+    Tires.innerHTML -= 2;
+    OTT = Math.random()*100;
+    if (OTT < 5+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.09)
+    {alert("You make contact with the wall...");
+    DTP()};}
+    else if (z.innerHTML == "+1") {
+    z.innerHTML = "N";
+    colorize(z);
+    playedCard.innerHTML = "N";
+    colorize(playedCard);
+    T01.innerHTML = +T01.innerHTML+Math.floor(Math.random()*1000+4500)/1000;
+    Tires.innerHTML -= 2;
+    OTT = Math.random()*100;
+    if (OTT < 5+weatherN/2)
+    {alert("You suffer some tire slip...");
+    OTTP()};
+    D = Math.random();
+    if (D < 0.09)
+    {alert("You make contact with the wall...");
+    DTP()};
+    nextlap();}
+    else;
+    break ;
+    case "N":
+    break ;
+    } };
+function drawCard() {
+    var a = document.getElementById("card0") ;
+    var b = document.getElementById("card1") ;
+    var c = document.getElementById("card2") ;
+    var d = document.getElementById("card3") ;
+    var e = document.getElementById("card4") ;
+    var f = document.getElementById("card5") ;
+    var g = document.getElementById("card6") ;
+    var h = document.getElementById("card7") ;
+    var i = document.getElementById("card8") ;
+    var z = document.getElementById("tableCard") ;
+    if (a.innerHTML == "N") {
+    a.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(a) ;
+    } else if (b.innerHTML == "N") {
+    b.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(b) ;
+    } else if (c.innerHTML == "N") {
+    c.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(c) ;
+    } else if (d.innerHTML == "N") {
+    d.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(d) ;
+    } else if (e.innerHTML == "N") {
+    e.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(e) ;
+    }  else if (f.innerHTML == "N") {
+    f.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(f) ;
+    } else if (g.innerHTML == "N") {
+    g.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(g) ;
+    } else if (h.innerHTML == "N") {
+    h.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(h) ;
+    } else if (i.innerHTML == "N") {
+    i.innerHTML = speed[Math.floor(Math.random() * 5)] ;
+    colorize(i) ;
+    } ;
+}
+function nextlap() {
+    if (+document.getElementById("lapsD").innerHTML <= document.getElementById("lapsT").innerHTML || document.getElementById("lapsD").innerHTML == "Q"){
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0);
+    var rowData = tableData.getElementsByTagName('tr'); 
+    var z = document.getElementById("tableCard");
+    if (document.getElementById("lapsD").innerHTML == "Q"){
+    Qualifying();
+    }
+    else{
+    drawCard();
+    if (Math.random() <=0.25){
+    drawCard();
+    }
+    for(var i = 0; i < DC; i++) {
+    DN = rowData.item(i).getElementsByTagName('td').item(2).innerHTML;
+    if (driverlist[DN].damage <= 4 && rowData.item(i).getElementsByTagName('td').item(0).innerHTML !== document.getElementById("N01").innerHTML){
+    rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +rowData.item(i).getElementsByTagName('td').item(1).innerHTML+(Math.floor(Math.random()*(6000-driverlist[DN].consis*1000))-(3000-driverlist[DN].consis*1000/2)+driverlist[DN].skill*1000)/1000};
+    }
+    z.innerHTML = "N" ;
+    colorize (z);
+    x = 0;
+    while (x < DC) {
+    DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML;
+    if (Math.random()*100 <= (driverlist[DN].off+weatherN)) {
+    OTT1();}
+    x++;}
+    x = 0;
+    while (x < DC) {
+    DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML;
+    if (Math.random()*100 <= driverlist[DN].wall) {
+    DT1();}
+    x++;}
+    x = 0;
+    while (x < DC) {
+    PS1();
+    x++;}
+    x = 0;
+    ET1();
+    sortData ();
+    dist();
+    for(var i = 0; i < DC; i++) {
+    DN = rowData.item(i).getElementsByTagName('td').item(2).innerHTML;
+    if (driverlist[DN].damage <= 4){
+    rowData.item(i).getElementsByTagName('td').item(1).innerHTML = parseFloat(rowData.item(i).getElementsByTagName('td').item(1).innerHTML).toFixed(3)};
+    }
+    alert ("End of Lap " + lapsD.innerHTML);
+    lapsD.innerHTML = +lapsD.innerHTML+1;
+    if (+document.getElementById("lapsD").innerHTML > document.getElementById("lapsT").innerHTML){
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0);
+    var rowData = tableData.getElementsByTagName('tr'); 
+     alert(document.getElementById("rank").rows[1].cells[0].innerHTML + " of Team " + driverlist[document.getElementById("rank").rows[1].cells[2].innerHTML].team + " won the race.");
+    lapsD.innerHTML = "Race Over";
+    for (var i = 0; i < rowData.length; i++) {
+    if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML) {
+    if (i == 0){
+    alert("You finished in first place.")
+    } else if (i == 1){
+    alert("You finished in second place.")
+    } else if (i == 2){
+    alert("You finished in third place.")
+    } else {
+    alert("You finished in " + (+i+1) + "th place"); } } ;
+    }
+    if (DC > 20) {
+        DC = "20";
+    }
+    DC = DC.toString();
+    switch (DC) {
+    case "20":
+    driverlist[document.getElementById("rank").rows[20].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[20].getElementsByTagName('td').item(2).innerHTML].points + 1;
+    case "19":
+    driverlist[document.getElementById("rank").rows[19].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[19].getElementsByTagName('td').item(2).innerHTML].points + 2;
+    case "18":
+    driverlist[document.getElementById("rank").rows[18].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[18].getElementsByTagName('td').item(2).innerHTML].points + 3;
+    case "17":
+    driverlist[document.getElementById("rank").rows[17].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[17].getElementsByTagName('td').item(2).innerHTML].points + 4;
+    case "16":
+    driverlist[document.getElementById("rank").rows[16].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[16].getElementsByTagName('td').item(2).innerHTML].points + 5;
+    case "15":
+    driverlist[document.getElementById("rank").rows[15].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[15].getElementsByTagName('td').item(2).innerHTML].points + 6;
+    case "14":
+    driverlist[document.getElementById("rank").rows[14].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[14].getElementsByTagName('td').item(2).innerHTML].points + 7;
+    case "13":
+    driverlist[document.getElementById("rank").rows[13].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[13].getElementsByTagName('td').item(2).innerHTML].points + 8;
+    case "12":
+    driverlist[document.getElementById("rank").rows[12].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[12].getElementsByTagName('td').item(2).innerHTML].points + 9;
+    case "11":
+    driverlist[document.getElementById("rank").rows[11].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[11].getElementsByTagName('td').item(2).innerHTML].points + 10;
+    case "10":
+    driverlist[document.getElementById("rank").rows[10].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[10].getElementsByTagName('td').item(2).innerHTML].points + 12;
+    case "9":
+    driverlist[document.getElementById("rank").rows[9].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[9].getElementsByTagName('td').item(2).innerHTML].points + 14;
+    case "8":
+    driverlist[document.getElementById("rank").rows[8].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[8].getElementsByTagName('td').item(2).innerHTML].points + 16;
+    case "7":
+    driverlist[document.getElementById("rank").rows[7].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[7].getElementsByTagName('td').item(2).innerHTML].points + 18;
+    case "6":
+    driverlist[document.getElementById("rank").rows[6].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[6].getElementsByTagName('td').item(2).innerHTML].points + 20;
+    case "5":
+    driverlist[document.getElementById("rank").rows[5].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[5].getElementsByTagName('td').item(2).innerHTML].points + 25;
+    case "4":
+    driverlist[document.getElementById("rank").rows[4].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[4].getElementsByTagName('td').item(2).innerHTML].points + 30;
+    case "3":
+    driverlist[document.getElementById("rank").rows[3].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[3].getElementsByTagName('td').item(2).innerHTML].points + 40;
+    case "2":
+    driverlist[document.getElementById("rank").rows[2].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[2].getElementsByTagName('td').item(2).innerHTML].points + 60;
+    case "1":
+    driverlist[document.getElementById("rank").rows[1].getElementsByTagName('td').item(2).innerHTML].points = +driverlist[document.getElementById("rank").rows[1].getElementsByTagName('td').item(2).innerHTML].points + 90;
+    } 
+    for (var i = 1; i <= rowData.length; i++) {
+        document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(1).innerHTML = +driverlist[document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(3).innerHTML].points;
+    } 
+    var tableTData = document.getElementById('teamStandings').getElementsByTagName('tbody').item(0); 
+    var rowTData = tableTData.getElementsByTagName('tr'); 
+    for (var i = 1; i <= rowTData.length; i++) {
+        document.getElementById("teamStandings").rows[i].getElementsByTagName('td').item(1).innerHTML = +driverlist[document.getElementById("teamStandings").rows[i].getElementsByTagName('td').item(3).innerHTML].points+driverlist[+document.getElementById("teamStandings").rows[i].getElementsByTagName('td').item(3).innerHTML+1].points;
+    } 
+    sortPoints();
+    sortTPoints();
+    for (var i = 1; i <= rowData.length; i++) {
+        document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(2).innerHTML = +document.getElementById("driverStandings").rows[i].getElementsByTagName('td').item(1).innerHTML-document.getElementById("driverStandings").rows[1].getElementsByTagName('td').item(1).innerHTML;
+    }
+    for (var i = 1; i <= rowTData.length; i++) {
+        document.getElementById("teamStandings").rows[i].getElementsByTagName('td').item(2).innerHTML = +document.getElementById("teamStandings").rows[i].getElementsByTagName('td').item(1).innerHTML-document.getElementById("teamStandings").rows[1].getElementsByTagName('td').item(1).innerHTML;
+    }
+    DC = rowData.length;
+    z.innerHTML = "Race Over";
+    colorize(z);
+    if (document.getElementById("racesD").innerHTML == document.getElementById("racesT").innerHTML) {
+    alert (document.getElementById("driverStandings").rows[1].cells[0].innerHTML + " of Team " + driverlist[document.getElementById("driverStandings").rows[1].cells[3].innerHTML].team + " won the driver championship.");
+    alert ("Team " + document.getElementById("teamStandings").rows[1].cells[0].innerHTML + " won the team championship.")
+    racesD.innerHTML = "Season Over";
+    racesDT.innerHTML = "Season Over";
+    } } } } 
+    else {alert("The current race is over. Please hit next race in either standings screen to continue with the season.");
+} };
+
+function pitStop() {
+    if (+document.getElementById("lapsD").innerHTML <= document.getElementById("lapsT").innerHTML) {
+    var a = document.getElementById("card0") ;
+    var b = document.getElementById("card1") ;
+    var c = document.getElementById("card2") ;
+    var d = document.getElementById("card3") ;
+    var e = document.getElementById("card4") ;
+    var f = document.getElementById("card5") ;
+    var g = document.getElementById("card6") ;
+    var h = document.getElementById("card7") ;
+    var i = document.getElementById("card8") ;
+    var PL = document.getElementById("PL") ;
+    var ST = (Math.floor(Math.random()*2000)+2000)/1000 ;
+    alert ("You made a " + (+PL.innerHTML+ST) + " second pit stop.") 
+    T01.innerHTML = +T01.innerHTML-PL.innerHTML-ST;
+    a.innerHTML = speed [Math.floor(Math.random() * 5)] ;
+    b.innerHTML = speed [Math.floor(Math.random() * 5)] ;
+    c.innerHTML = speed [Math.floor(Math.random() * 5)] ;
+    d.innerHTML = speed [Math.floor(Math.random() * 5)] ;
+    e.innerHTML = speed [Math.floor(Math.random() * 5)] ;
+    f.innerHTML = "N";
+    g.innerHTML = "N";
+    h.innerHTML = "N";
+    i.innerHTML = "N";
+    colorize(a); colorize(b); colorize(c); colorize(d); colorize(e); colorize(f); colorize(g); colorize(h); colorize(i); 
+    Tires.innerHTML = 20;
+    nextlap();
+}   else {alert("The current race is over. Please hit next race in either standings screen to continue with the season.");
+} }
+
+function Qualifying(){
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr'); 
+    var T01 = document.getElementById("T01");
+    for(var i = 0; i < DC; i++) {
+    DN = rowData.item(i).getElementsByTagName('td').item(2).innerHTML;
+    if (driverlist[DN].damage <= 4 && rowData.item(i).getElementsByTagName('td').item(0).innerHTML !== document.getElementById("N01").innerHTML) {
+    rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +rowData.item(i).getElementsByTagName('td').item(1).innerHTML+(Math.floor(Math.random()*(6000-driverlist[DN].consis*1000))-(3000-driverlist[DN].consis*1000/2)+driverlist[DN].skill*1000)/1000};
+    }
+    sortData();
+    for(var i = 0; i < DC; i++) { 
+(rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +i*-0.5);
+    };
+    if (T01.innerHTML == 0){
+    alert("You qualified in 1st place.")
+    } else if (T01.innerHTML == -0.5){
+    alert("You qualified in 2nd place.")
+    } else if (T01.innerHTML == -1){
+    alert("You qualified in 3rd place.")
+    } else if (T01.innerHTML == -25){
+    alert("You are starting in pit row.")
+    } else {
+    alert("You qualified in " + Math.abs(T01.innerHTML*2-1) + "th place.")
+    };
+    document.getElementById("lapsD").innerHTML = 01;
+    var z = document.getElementById("tableCard") ;
+    z.innerHTML = "N" ;
+    colorize(z);
+    drawCard();
+    };
+
+function ET1()
+//defender takes damage=1%
+//pass unsuccessful=54%
+//both takes damage=1%
+//pass successful=27%
+//attacker takes damage=2%
+//nothing=15%
+    {var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr'); 
+    for(var i = 0; i < DC; i++) { for(var j = i+1; j < DC; j++) { 
+    if (Math.abs(parseFloat(rowData.item(i).getElementsByTagName('td').item(1).innerHTML)-(parseFloat(rowData.item(j).getElementsByTagName('td').item(1).innerHTML)-document.getElementById("Pass").innerHTML)) <= 0.250) {
+    if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML || rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML){alert(rowData.item(i).getElementsByTagName('td').item(0).innerHTML + " and " + rowData.item(j).getElementsByTagName('td').item(0).innerHTML + " go wheel to wheel.")}; 
+    {DNA = rowData.item(j).getElementsByTagName('td').item(2).innerHTML;
+    DND = rowData.item(i).getElementsByTagName('td').item(2).innerHTML;
+    ET = Math.random()*100-driverlist[DNA].attack+driverlist[DND].defend;
+    if (ET < 1) {
+    (alert(rowData.item(i).getElementsByTagName('td').item(0).innerHTML + " and " + rowData.item(j).getElementsByTagName('td').item(0).innerHTML + " go wheel to wheel and make contact with each other..."));
+    if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML){
+    DTP(); 
+    x = j;
+    DT1();
+    } else if (rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML){
+    x = i;
+    DT1(); 
+    DTP();
+    } else {
+    x = i;
+    DT1(); 
+    x = j;
+    DT1();
+    } }
+    else if(ET < 2) {
+    (alert(rowData.item(i).getElementsByTagName('td').item(0).innerHTML + " forces " + rowData.item(j).getElementsByTagName('td').item(0).innerHTML + " off track."));
+    if (rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML) {
+    OTTP();
+    } else {
+    x = j;
+    OTT1(); 
+    } }
+    else if(ET < 3) {
+    (alert(rowData.item(i).getElementsByTagName('td').item(0).innerHTML + " and " + rowData.item(j).getElementsByTagName('td').item(0).innerHTML + " go wheel to wheel and make contact with each other..."));
+    if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML) {
+    DTP();
+    } else {
+    x = i;
+    DT1(); 
+    } }
+    else if(ET < 4) {
+    (alert(rowData.item(i).getElementsByTagName('td').item(0).innerHTML + " and " + rowData.item(j).getElementsByTagName('td').item(0).innerHTML + " go wheel to wheel and make contact with each other..."));
+    if (rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML) {
+    DTP();
+    } else {
+    x = j;
+    DT1(); 
+    } }
+    else if(ET < 31) {
+    TL = Math.floor(Math.random()*5+6);
+   if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML || rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML){(alert(rowData.item(j).getElementsByTagName('td').item(0).innerHTML + " gets by " + rowData.item(i).getElementsByTagName('td').item(0).innerHTML + "."))};
+(rowData.item(i).getElementsByTagName('td').item(1).innerHTML =+parseFloat(rowData.item(j).getElementsByTagName('td').item(1).innerHTML)-0.001);
+   }
+    else if(ET < 46) {
+    if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML || rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML)    
+    {(alert("and continue to fight over there next lap."))};
+    rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +parseFloat(rowData.item(j).getElementsByTagName('td').item(1).innerHTML);
+    }
+    else {
+    if (rowData.item(i).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML || rowData.item(j).getElementsByTagName('td').item(0).innerHTML == document.getElementById("N01").innerHTML)
+        {(alert(rowData.item(i).getElementsByTagName('td').item(0).innerHTML + " successfully blocks " + rowData.item(j).getElementsByTagName('td').item(0).innerHTML + "."))};
+(rowData.item(j).getElementsByTagName('td').item(1).innerHTML = +parseFloat(rowData.item(i).getElementsByTagName('td').item(1).innerHTML)-0.001);
+   } } } } } };
+
+function dist() {
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr');
+    for (var i = 0; i < DC-1; i++) { 
+    if (parseFloat(rowData.item(i).getElementsByTagName('td').item(1).innerHTML)-parseFloat(rowData.item(i+1).getElementsByTagName('td').item(1).innerHTML) <= 0.200 && rowData.item(i).getElementsByTagName('td').item(1).innerHTML !== rowData.item(i+1).getElementsByTagName('td').item(1).innerHTML) {
+    (rowData.item(i+1).getElementsByTagName('td').item(1).innerHTML = +parseFloat(rowData.item(i).getElementsByTagName('td').item(1).innerHTML)-(Math.floor(Math.random()*100)+200)/1000);
+    } };
+    for(var i = DC-1; i > -1; i--) { 
+rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +parseFloat(rowData.item(i).getElementsByTagName('td').item(1).innerHTML)-(rowData.item(0).getElementsByTagName('td').item(1).innerHTML)
+    } };
+
+//0=9%
+//1=45%
+//2=20%
+//1+draw again=10%
+//1+pit now=2%
+//1-5=10%
+//6-10=2%
+//crash=1%
+//crash SC=1%
+function DTP()
+    {var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0);
+    var rowData = tableData.getElementsByTagName('tr'); 
+    DT = Math.random();
+    if (DT <0.01) {
+    SC = Math.floor(Math.random()*3+1);
+    (alert("and you have crashed out of the race. Safety car comes out for " + SC + " laps."));
+    document.getElementById("T01").innerHTML= ("Out");
+    for (var i = 0; i < rowData.length; i++) {
+    if (rowData.item(i).getElementsByTagName('td').item(2).innerHTML == 201) {
+    tableData.insertBefore(rowData.item(i),rowData.item(DC));} }
+    DC -= 1;
+    for(var i = 0; i < DC; i++) { 
+    if (driverlist[rowData.item(i).getElementsByTagName('td').item(2).innerHTML].pit <= +document.getElementById("lapsD").innerHTML+SC) {
+    x = i;
+    PS2();
+    } }
+    for(var i = 0; i < DC; i++) { 
+    driverlist[rowData.item(i).getElementsByTagName('td').item(2).innerHTML].pit = driverlist[rowData.item(i).getElementsByTagName('td').item(2).innerHTML].pit + SC;
+        
+    }
+    sortData();
+    x = 999;
+    driverlist[201].damage = 99;
+    document.getElementById("lapsD").innerHTML = +lapsD.innerHTML+SC;
+    DC -= 1;
+    for(var i = 0; i < DC; i++) { 
+(rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +i*-0.250);
+    }
+    while(+document.getElementById("lapsD").innerHTML  <= +document.getElementById("lapsT").innerHTML)
+    {nextlap()};
+    }
+    else if(DT <0.02) {
+    (alert("and you crash out of the race."));
+    (driverlist[201].damage = 99);
+    document.getElementById("T01").innerHTML= ("Out");
+    for (var i = 0; i < rowData.length; i++) {
+    if (rowData.item(i).getElementsByTagName('td').item(2).innerHTML == 201) {
+    tableData.insertBefore(rowData.item(i),rowData.item(DC));} }
+    DC -= 1;
+ while(+document.getElementById("lapsD").innerHTML  <= +document.getElementById("lapsT").innerHTML)
+    {nextlap()};
+    }
+    else if(DT <0.04) {
+    (alert("you take 1 damage and suffer a puncture forcing you to pit."));
+    (driverlist[201].damage = +driverlist[201].damage+1)
+    pitStop();
+    }
+    else if(DT <0.14) {
+    (alert("and you take 1 damage..."));
+    (driverlist[201].damage = +driverlist[201].damage+1)
+    DTP();
+    }
+    else if(DT <0.16) {
+    TL = Math.floor(Math.random()*5+6);
+    (alert("and you lose " + TL + " seconds."));
+(document.getElementById("T01").innerHTML = +T01.innerHTML-TL);
+    }
+    else if(DT <0.26) {
+    TL = Math.floor(Math.random()*5+1);
+    (alert("and you lose " + TL + " seconds."));
+(document.getElementById("T01").innerHTML = +T01.innerHTML-TL);
+    }
+    else if(DT <0.46) {
+    (alert("and you take 2 damage."));
+    (driverlist[201].damage = +driverlist[201].damage+2);
+    }
+    else if(DT <0.91) {
+    (alert("and you take 1 damage."));
+    (driverlist[201].damage = +driverlist[201].damage+1);
+    }
+    else {
+    (alert("and you just narrowly avoid damage."))
+    };
+    if (driverlist[201].damage >= 5 && driverlist[201].damage < 99) {(alert (document.getElementById("N01").innerHTML + " has retired from the race."));
+    document.getElementById("T01").innerHTML= ("Out");
+    for (var i = 0; i < rowData.length; i++) {
+    if (rowData.item(i).getElementsByTagName('td').item(2).innerHTML == 201) {
+    tableData.insertBefore(rowData.item(i),rowData.item(DC));} }
+    DC -= 1;
+ while(+document.getElementById("lapsD").innerHTML  <= +document.getElementById("lapsT").innerHTML)
+    {nextlap()}};
+    };
+function DT1()
+    {var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0);
+    var rowData = tableData.getElementsByTagName('tr'); 
+    DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML;
+    {DT = Math.random(); 
+    {if (DT <0.01) {
+    SC = Math.floor(Math.random()*3+1);
+    (alert(driverlist[DN].name + " makes contact with the wall and has crashed out of the race. Safety car comes out for " + SC + " laps."));
+    driverlist[DN].damage = 99;
+    rowData.item(x).getElementsByTagName('td').item(1).innerHTML = "Out";
+    tableData.insertBefore(rowData.item(x),rowData.item(DC));
+    DC -= 1;
+    for(var i = 0; i < DC; i++) { 
+    if (driverlist[rowData.item(i).getElementsByTagName('td').item(2).innerHTML].pit <= +document.getElementById("lapsD").innerHTML+SC) {
+    x = i;
+    PS2();
+    } }
+    var pS = confirm("Do you want to make a pit stop?");
+if (pS == true) {
+    pitStop();
+}
+else {
+    
+}
+    for(var i = 0; i < DC; i++) { 
+    driverlist[rowData.item(i).getElementsByTagName('td').item(2).innerHTML].pit = driverlist[rowData.item(i).getElementsByTagName('td').item(2).innerHTML].pit + SC;
+        
+    }
+    document.getElementById("lapsD").innerHTML = +lapsD.innerHTML+SC;
+    sortData();
+    for(var i = 0; i < DC; i++) { 
+(rowData.item(i).getElementsByTagName('td').item(1).innerHTML = +i*-0.250);
+    } 
+    x = 999;
+    }
+    else if(DT <0.02) {
+    alert(driverlist[DN].name + " makes contact with the wall and crashes out of the race.");
+    (driverlist[DN].damage = 99);
+    rowData.item(x).getElementsByTagName('td').item(1).innerHTML = "Out";
+    tableData.insertBefore(rowData.item(x),rowData.item(DC));
+    DC -= 1;
+    x--;
+    DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML;
+}
+    else if(DT <0.04) {
+    alert(driverlist[DN].name + " makes contact with the wall and takes 1 damage. He has also suffered a puncture and has to pit.");
+    driverlist[DN].damage = driverlist[DN].damage + 1;
+    PS2();
+    }
+    else if(DT <0.14) {
+    driverlist[DN].damage = driverlist[DN].damage + 1;
+    DT1();
+    }
+    else if(DT <0.16) {
+    TL = Math.floor(Math.random()*5+6);
+    alert(driverlist[DN].name + " makes contact with the wall and lost " + TL + " seconds.");
+(rowData.item(x).getElementsByTagName('td').item(1).innerHTML = +parseInt(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-TL);
+    }
+    else if(DT <0.26) {
+    TL = Math.floor(Math.random()*5+1);
+    alert(driverlist[DN].name + " makes contact with the wall and lost " + TL + " seconds.");
+(rowData.item(x).getElementsByTagName('td').item(1).innerHTML = +parseInt(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-TL);
+    }
+    else if(DT <0.46) {
+    driverlist[DN].damage = driverlist[DN].damage + 2;
+    }
+    else if(DT <0.91) {
+    driverlist[DN].damage = driverlist[DN].damage + 1;
+   }
+    else {
+    
+    } if (driverlist[DN].damage >= 5 && driverlist[DN].damage < 99) {
+    (alert (driverlist[DN].name + " has retired from the race."));
+   rowData.item(x).getElementsByTagName('td').item(1).innerHTML = "Out";
+    tableData.insertBefore(rowData.item(x),rowData.item(DC));
+    DC -= 1
+    } } } };
+
+//0=50%
+//1-5=30%
+//6-10=15%
+//10+DT=5%
+function OTTP()
+    {OTT = Math.random();
+    if (OTT <0.05) {
+    alert("and has gone off track lost 10 seconds and...");
+document.getElementById("T01").innerHTML = +T01.innerHTML-10;
+    DTP();}
+    else if(OTT <0.20) {
+    TL = Math.floor(Math.random()*5+6);
+    (alert("and lost " + TL + " seconds."));
+(document.getElementById("T01").innerHTML = +T01.innerHTML-TL)
+    }
+    else if(OTT <0.50) {
+    TL = Math.floor(Math.random()*5+1);
+    (alert("and lost " + TL + " seconds."));
+(document.getElementById("T01").innerHTML = +T01.innerHTML-TL)
+    }
+    else
+    alert("but recovered.");
+    };
+function OTT1()
+    {var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0);
+    var rowData = tableData.getElementsByTagName('tr'); 
+    DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML; 
+    {OTT = Math.random(); if(rowData.item(x).getElementsByTagName('td').item(0).innerHTML !== document.getElementById("N01").innerHTML){
+    if (OTT <0.05) {
+    alert(driverlist[DN].name + " has some tire slip and has gone off track lost 10 seconds.");
+rowData.item(x).getElementsByTagName('td').item(1).innerHTML =+parseFloat(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-10;
+    DT1();}
+    else if(OTT <0.20) {
+    TL = Math.floor(Math.random()*5+6);
+   (alert(driverlist[DN].name + " has some tire slip and lost " + TL + " seconds."));
+(rowData.item(x).getElementsByTagName('td').item(1).innerHTML =+parseFloat(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-TL);
+    }
+    else if(OTT <0.50) {
+    TL = Math.floor(Math.random()*5+1);
+   (alert(driverlist[DN].name + " has some tire slip and lost " + TL + " seconds."));
+(rowData.item(x).getElementsByTagName('td').item(1).innerHTML =+parseFloat(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-TL);
+    }
+    else {
+    
+    } } } };
+       
+function PS1()
+    {var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr');
+    var DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML; 
+    {
+    if (rowData.item(x).getElementsByTagName('td').item(0).innerHTML != document.getElementById("N01").innerHTML) {
+    if (driverlist[DN].pit == +document.getElementById("lapsD").innerHTML) {
+    rowData.item(x).getElementsByTagName('td').item(1).innerHTML = +parseFloat(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-document.getElementById("PL").innerHTML-(Math.floor(Math.random()*3000)+2000)/1000;
+    driverlist[DN].pit = +lapsD.innerHTML+30;
+   (alert(rowData.item(x).getElementsByTagName('td').item(0).innerHTML + " makes a pit stop."))}}}};
+function PS2()
+    {var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+var rowData = tableData.getElementsByTagName('tr'); 
+    DN = rowData.item(x).getElementsByTagName('td').item(2).innerHTML; 
+    {
+    rowData.item(x).getElementsByTagName('td').item(1).innerHTML = +parseFloat(rowData.item(x).getElementsByTagName('td').item(1).innerHTML)-document.getElementById("PL").innerHTML-(Math.floor(Math.random()*3000)+2000)/1000;
+    driverlist[DN].pit = +lapsD.innerHTML+30;
+   (alert(rowData.item(x).getElementsByTagName('td').item(0).innerHTML + " makes a pit stop."))}};
+   
+function getWeather() {
+    weatherN = Math.random();
+    if (weatherN <= 0.05) {
+    weatherN = 10;
+    document.getElementById("Weather").innerHTML = "Pouring Rain";
+    } else if (weatherN <= 0.12) {
+    weatherN = 5;
+    document.getElementById("Weather").innerHTML = "Moderate Rain";
+    } else if (weatherN <= 0.25) {
+    weatherN = 2;
+    document.getElementById("Weather").innerHTML = "Light Rain";
+    } else if (weatherN <= 0.50) {
+    weatherN = 0;
+    document.getElementById("Weather").innerHTML = "Cloudy";
+    } else {
+    weatherN = 0;
+    document.getElementById("Weather").innerHTML = "Sunny";
+    }
+}
+   
+function sortData() {
+    var tableData = document.getElementById('rank').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr'); 
+    for (var i = 0; i < DC - 1; i++) {
+    for (var j = 0; j < DC - (i+1); j++) { 
+    if (parseFloat(rowData.item(j).getElementsByTagName('td').item(1).innerHTML) < parseFloat(rowData.item(j+1).getElementsByTagName('td').item(1).innerHTML)) {
+    tableData.insertBefore(rowData.item(j+1),rowData.item(j)); 
+    } } } };
+function sortPoints () {
+    var tableData = document.getElementById('driverStandings').getElementsByTagName('tbody').item(0); 
+    var rowData = tableData.getElementsByTagName('tr'); 
+    for (var i = 0; i < rowData.length - 1; i++) {
+    for (var j = 0; j < rowData.length - (i+1); j++) { 
+    if (parseFloat(rowData.item(j).getElementsByTagName('td').item(1).innerHTML) < parseFloat(rowData.item(j+1).getElementsByTagName('td').item(1).innerHTML)) {
+    tableData.insertBefore(rowData.item(j+1),rowData.item(j)); 
+    } } } };
+function sortTPoints () {
+    var tableTData = document.getElementById('teamStandings').getElementsByTagName('tbody').item(0); 
+    var rowTData = tableTData.getElementsByTagName('tr'); 
+    for (var i = 0; i < rowTData.length - 1; i++) {
+    for (var j = 0; j < rowTData.length - (i+1); j++) { 
+    if (parseFloat(rowTData.item(j).getElementsByTagName('td').item(1).innerHTML) < parseFloat(rowTData.item(j+1).getElementsByTagName('td').item(1).innerHTML)) {
+    tableTData.insertBefore(rowTData.item(j+1),rowTData.item(j)); 
+    } } } };
+    
+    // show the given page, hide the rest 
+function show(elementID) {// try to find the requested page and alert if it's not found 
+var ele = document.getElementById(elementID); 
+if (!ele) {alert("no such element"); return;} // get all pages, loop through them and hide them 
+var pages = document.getElementsByClassName('page'); 
+for(var i = 0; i < pages.length; i++) { pages[i].style.display = 'none'; } // then show the requested page 
+ele.style.display = 'block'
+}
+
+function toggleRules() {
+    alert("Welcome to my racing game!  The objective of the game is to finish in first.  To start there is qualifying to determine starting positions.  The speeds of the cards are as follows Red (+0.5-+1.5), Yellow (+1.5-+2.5), Green (+2.5-+3.5), Blue (+3.5-+4.5), and Gray (+4.5-+5.5).  You can play anything on a Red and a Red on anything.  Also you can play a Yellow on a Yellow.  Your turn ends when you pay 2 cards or click end turn.  At the end of every turn you will draw one or two cards.  Clicking on Pit Stop will replace your hand and give you 6 new cards but will cost you about PL+3 or " + (+document.getElementById("PL").innerHTML+3) + " seconds and it also ends the lap.  Maximum hand size is 9 cards.  There is also a difficulty to passing other drivers.  If cars get within 0.250 seconds of each other they will fight for position.  If cars are between 0.250 and " + +document.getElementById("Pass").innerHTML + ", they will go to the Pass distance.  Cars will randomly take damage and go off track (the faster you go the more likely you are to go off track and/or take damage).  Damage has no effect until you aquire 5, at which point you retire from the race.  Going off track might cost you time and sometimes you might take damage.  I hope you have fun with the game I made!");
+}
+</script>
+</html>
